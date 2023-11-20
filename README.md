@@ -1,2 +1,3 @@
-# labeddit-frontend
-Front-End do projeto Labeddit
+# Projeto Labeddit Frontend
+
+> Front-End do projeto Labeddit
