@@ -1,23 +1,27 @@
-// // Exemplo de uso:
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Header } from '../components';
 
-// import React from 'react';
-// import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+    LoginPage,
+    SignupPage,
+    FeedPage,
+    DetailsPage,
+    ErrorsPage,
+} from '../pages';
+import { PATH } from '../constants/constants';
 
-// import PokemonListPage from '../Pages/PokemonListPage/PokemonListPage';
-// import PokemonDetailPage from '../Pages/PokemonDetailPage/PokemonDetailPage';
-
-// const Router = () => {
-//     return (
-//         <BrowserRouter>
-//             <Routes>
-//                 <Route path="/" element={<PokemonListPage />} />
-//                 {/* COM path */}
-//                 <Route path="/details/:name" element={<PokemonDetailPage />} />
-//                 {/* SEM path */}
-//                 {/* <Route path="/details" element={<PokemonDetailPage />} /> */}
-//             </Routes>
-//         </BrowserRouter>
-//     );
-// };
-
-// export default Router;
+export const Router = () => {
+    return (
+        <BrowserRouter>
+            {/* <Header /> */}
+            {PATH !== '/' ? <Header /> : ''}
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/feedpage" element={<FeedPage />} />
+                <Route path="/details/:id" element={<DetailsPage />} />
+                <Route path="*" element={<ErrorsPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
+};

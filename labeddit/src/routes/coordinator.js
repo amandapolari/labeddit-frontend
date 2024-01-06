@@ -1,22 +1,19 @@
-// Exemplo de arquivo:
-
-/* 
-export const goToHome = (navegate) => {
-    navegate('/');
+export const goToLoginPage = (navigator) => {
+    navigator('/');
 };
 
-export const goToPokedex = (navegate) => {
-    navegate(`/pokedex`);
+export const goToSignupPage = (navigator) => {
+    navigator('/signup');
 };
 
-// COM path
-export const goToDetails = (navegate, name) => {
-    navegate(`/details/${name}`);
+export const goToFeedPage = (navigator) => {
+    navigator('/feedpage');
 };
 
-// SEM path
-export const goToDetails = (navegate) => {
-    navegate(`/details`);
+export const goToDetailsPage = (navigator, id) => {
+    navigator(`/details/${id}`);
 };
 
-*/
+export const goToErrorsPage = (navigator) => {
+    navigator('*');
+};
