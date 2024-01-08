@@ -1,8 +1,12 @@
+import { Router } from './routes';
+import GlobalState from './contexts/GlobalState';
+
 const App = () => {
     return (
-        <div>
+        <GlobalState>
+            <Router />
             <p>Projeto funcionando!</p>
-        </div>
+        </GlobalState>
     );
 };
 

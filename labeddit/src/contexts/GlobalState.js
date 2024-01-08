@@ -1,11 +1,12 @@
-/* eslint-disable no-unused-vars */
-// Exemplo de estrutura:
-
 import GlobalContext from './GlobalContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const GlobalState = ({ children }) => {
     const [example, setExample] = useState([]);
+
+    useEffect(() => {
+        setExample(['name1', 'name2', 'name3', 'name4']);
+    }, []);
 
     const datas = {
         example,
