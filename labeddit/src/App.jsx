@@ -1,13 +1,12 @@
 import { Router } from './routes';
-import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from './styles';
+import GlobalState from './contexts/GlobalState';
 
 const App = () => {
     return (
-        <ChakraProvider theme={theme}>
+        <GlobalState>
             <Router />
             <p>Projeto funcionando!</p>
-        </ChakraProvider>
+        </GlobalState>
     );
 };
 
