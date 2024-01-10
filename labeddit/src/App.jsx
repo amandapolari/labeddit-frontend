@@ -5,7 +5,7 @@ const App = () => {
     return (
         <GlobalState>
             <Router />
-            <p>Projeto funcionando!</p>
+            {/* <p>Projeto funcionando!</p> */}
         </GlobalState>
     );
 };
