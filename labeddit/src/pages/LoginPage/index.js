@@ -1,5 +1,5 @@
 import { useForm } from '../../hooks/useForm';
-import { goToFeedPage } from '../../routes/coordinator';
+import { goToFeedPage, goToSignupPage } from '../../routes/coordinator';
 import { Login } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,11 +43,17 @@ export const LoginPage = () => {
             // console.log(error.response.data);
             // console.log(error.response.data[0].message);
 
-            console.log('Resposta de erro:', error);
+            // console.log('Resposta de erro:', error);
+            
+
+            // error.request.response && console.log(error.request.response);
 
             // Verificar e imprimir os dados de resposta de erro
             error.response &&
                 console.log('Dados de resposta de erro:', error.response.data);
+
+            // error.response.data && console.log(error.response.data);
+            // error.response.data[0].message && console.log(error.response.data[0].message);
 
             // Verificar e imprimir a mensagem de erro
             error.response?.data?.[0]?.message &&
@@ -56,35 +62,56 @@ export const LoginPage = () => {
                     error.response.data[0].message
                 );
         }
+
+        // =============
+        // =============
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Email:
-                <input
-                    type="text"
-                    name="email"
-                    value={form.email}
-                    onChange={onChange}
-                />
-            </label>
+        <div>
+            <h1>LoginPage</h1>
+
             <br />
-            <label>
-                Password:
-                <input
-                    type="text"
-                    name="password"
-                    value={form.password}
-                    onChange={onChange}
-                />
-            </label>
             <br />
-            <button type="submit">Enviar</button>
-            <br />
-            <button type="button" onClick={resetForm}>
-                Resetar Formulário
+
+            <button
+                type="button"
+                onClick={() => {
+                    goToSignupPage(navigator);
+                }}
+            >
+                Cadastrar
             </button>
-        </form>
+
+            <br />
+            <br />
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Email:
+                    <input
+                        type="text"
+                        name="email"
+                        value={form.email}
+                        onChange={onChange}
+                    />
+                </label>
+                <br />
+                <label>
+                    Password:
+                    <input
+                        type="text"
+                        name="password"
+                        value={form.password}
+                        onChange={onChange}
+                    />
+                </label>
+                <br />
+                <button type="submit">Enviar</button>
+                <br />
+                <button type="button" onClick={resetForm}>
+                    Resetar Formulário
+                </button>
+            </form>
+        </div>
     );
 };
