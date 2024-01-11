@@ -5,6 +5,8 @@ export const PATH = window.location.pathname;
 
 export const urlPosts = 'posts';
 
+export const urlComments = 'comments';
+
 export const Logout = (navigator) => {
     localStorage.removeItem('token');
     navigator('/');

@@ -7,6 +7,7 @@ import { useForm } from '../../hooks/useForm';
 import { CreatePost } from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Loading } from '../../components';
+import { goToDetailsPage } from '../../routes/coordinator';
 
 export const FeedPage = () => {
     const navigator = useNavigate();
@@ -105,14 +106,29 @@ export const FeedPage = () => {
             ) : isError ? (
                 <Error />
             ) : (
+                posts &&
                 posts.map((post) => {
                     return (
                         <div key={post.id}>
-                            <p>{post.nickname}</p>
-                            <p>{post.content}</p>
-                            <p>{post.likesCount}</p>
-                            <p>{post.dislikesCount}</p>
-                            <p>{post.commentsCount}</p>
+                            <hr />
+                            {/* {console.log(post)} */}
+                            <p>
+                                CRIADOR DO POST:
+                                {post && post.creator && post.creator.nickname}
+                            </p>
+                            <p>CONTEUDO: {post.content}</p>
+                            <p> LIKES: {post.likesCount}</p>
+                            <p> DISLIKES: {post.dislikesCount}</p>
+                            <p> COMENTÁRIOS: {post.commentsCount}</p>
+                            <p>{post.id}</p>
+                            <button
+                                onClick={() => {
+                                    goToDetailsPage(navigator, post.id);
+                                }}
+                            >
+                                + DETALHES
+                            </button>
+                            <hr />
                         </div>
                     );
                 })

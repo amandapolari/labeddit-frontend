@@ -31,3 +31,16 @@ export const CreatePost = async (body) => {
         console.log('Resposta de erro:', error);
     }
 };
+
+export const CreateComment = async (body, id) => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}comments/${id}`, body, {
+            headers: {
+                Authorization: localStorage.getItem('token'),
+            },
+        });
+        return data;
+    } catch (error) {
+        console.log('Resposta de erro:', error);
+    }
+};
