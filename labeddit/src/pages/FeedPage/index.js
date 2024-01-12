@@ -63,8 +63,8 @@ export const FeedPage = () => {
 
             // console.log('Resposta do post:', response);
 
-            response.message &&
-                console.log('Mensagem de resposta do post:', response.message);
+            // response.message &&
+            //     console.log('Mensagem de resposta do post:', response.message);
 
             // console.log('Resposta do post:', response);
         } catch (error) {

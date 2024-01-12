@@ -66,17 +66,17 @@ export const DetailsPage = () => {
 
             // console.log('Resposta do post:', response);
 
-            response.message &&
-                console.log(
-                    'Mensagem de resposta do comentário:',
-                    response.message
-                );
+            // response.message &&
+            //     console.log(
+            //         'Mensagem de resposta do comentário:',
+            //         response.message
+            //     );
 
             // console.log('Resposta do post:', response);
         } catch (error) {
             console.log('Resposta de erro:', error);
             error.response &&
-                console.log('Dados de resposta de erro:', error.response.data);
+                // console.log('Dados de resposta de erro:', error.response.data);
             error.response?.data?.[0]?.message &&
                 console.log(
                     'Mensagem de erro:',

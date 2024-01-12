@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
+import { useState } from 'react';
 
 export const SignupPage = () => {
     const navigator = useNavigate();
@@ -12,8 +13,22 @@ export const SignupPage = () => {
         password: '',
     });
 
+    const [isChecked, setIsChecked] = useState(false);
+
+    const [messageCheckbox, setMessageCheckbox] = useState('');
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+        setMessageCheckbox('');
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!isChecked) {
+            setMessageCheckbox('Você precisa aceitar os termos de uso!');
+            return;
+        }
 
         try {
             const body = {
@@ -100,6 +115,21 @@ export const SignupPage = () => {
                 />
 
                 <br />
+
+                <div>
+                    {/* Rótulo do checkbox */}
+                    <label>
+                        Checkbox Label:
+                        {/* O próprio checkbox */}
+                        <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label>
+
+                    {messageCheckbox && <p>{messageCheckbox}</p>}
+                </div>
                 <br />
                 <button type={'submit'}>Cadastrar</button>
                 <br />

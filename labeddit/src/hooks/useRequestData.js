@@ -15,6 +15,7 @@ const useRequestData = (path, isUpdate) => {
                         Authorization: localStorage.getItem('token'),
                     },
                 });
+                console.log('dados da API:', response.data);
                 response.data.results
                     ? setData(response.data.results)
                     : setData(response.data);
