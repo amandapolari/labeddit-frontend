@@ -4,7 +4,7 @@ import useRequestData from '../../hooks/useRequestData';
 import { useContext, useEffect } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 import { urlPosts } from '../../constants/constants';
-import { CreateComment } from '../../services/api';
+import { CreateComment, DeleteComment } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
 import { Error, Loading } from '../../components';
 
@@ -77,7 +77,34 @@ export const DetailsPage = () => {
             console.log('Resposta de erro:', error);
             error.response &&
                 // console.log('Dados de resposta de erro:', error.response.data);
-            error.response?.data?.[0]?.message &&
+                error.response?.data?.[0]?.message &&
+                console.log(
+                    'Mensagem de erro:',
+                    error.response.data[0].message
+                );
+        }
+    };
+
+    const handleDeleteComment = async (id) => {
+        try {
+            const response = await DeleteComment(id);
+
+            setIsUpdate(!isUpdate);
+
+            console.log('Resposta do post:', response);
+
+            // response.message &&
+            //     console.log(
+            //         'Mensagem de resposta do comentário:',
+            //         response.message
+            //     );
+
+            // console.log('Resposta do post:', response);
+        } catch (error) {
+            console.log('Resposta de erro:', error);
+            error.response &&
+                // console.log('Dados de resposta de erro:', error.response.data);
+                error.response?.data?.[0]?.message &&
                 console.log(
                     'Mensagem de erro:',
                     error.response.data[0].message
@@ -120,6 +147,18 @@ export const DetailsPage = () => {
                                 <hr />
                                 <p>{comment.creator.nickname}</p>
                                 {comment.content}
+                                {comment.isCurrentUserPost ? (
+                                    <button
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            handleDeleteComment(comment.id);
+                                        }}
+                                    >
+                                        Excluir
+                                    </button>
+                                ) : (
+                                    ''
+                                )}
                                 <p>LIKE: {comment.likesCount}</p>
                                 <p>DISLIKE: {comment.dislikesCount}</p>
                                 <hr />

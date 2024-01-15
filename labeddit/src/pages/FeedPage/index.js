@@ -4,7 +4,7 @@ import useRequestData from '../../hooks/useRequestData';
 import { Logout, urlPosts } from '../../constants/constants';
 import { useContext, useEffect } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { CreatePost } from '../../services/api';
+import { CreatePost, DeletePost } from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Loading } from '../../components';
 import { goToDetailsPage } from '../../routes/coordinator';
@@ -79,6 +79,44 @@ export const FeedPage = () => {
         }
     };
 
+    const handleDeletePost = async (postId) => {
+        try {
+            const response = await DeletePost(postId);
+
+            console.log('Resposta do delete:', response);
+
+            setIsUpdate(!isUpdate);
+        } catch (error) {
+            console.log('Resposta de erro:', error);
+            error.response &&
+                console.log('Dados de resposta de erro:', error.response.data);
+            error.response?.data?.[0]?.message &&
+                console.log(
+                    'Mensagem de erro:',
+                    error.response.data[0].message
+                );
+        }
+    };
+
+    // const handleEditPost = async (body, postId) => {
+    //     try {
+    //         const response = await editPost(body, postId);
+
+    //         console.log('Resposta do delete:', response);
+
+    //         setIsUpdate(!isUpdate);
+    //     } catch (error) {
+    //         console.log('Resposta de erro:', error);
+    //         error.response &&
+    //             console.log('Dados de resposta de erro:', error.response.data);
+    //         error.response?.data?.[0]?.message &&
+    //             console.log(
+    //                 'Mensagem de erro:',
+    //                 error.response.data[0].message
+    //             );
+    //     }
+    // };
+
     return (
         <div>
             <button
@@ -117,6 +155,23 @@ export const FeedPage = () => {
                                 {post && post.creator && post.creator.nickname}
                             </p>
                             <p>CONTEUDO: {post.content}</p>
+                            {post.isCurrentUserPost ? (
+                                <button
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        handleDeletePost(post.id);
+                                    }}
+                                >
+                                    Excluir
+                                </button>
+                            ) : (
+                                ''
+                            )}
+                            {/* {post.isCurrentUserPost ? (
+                                <button>Editar</button>
+                            ) : (
+                                ''
+                            )} */}
                             <p> LIKES: {post.likesCount}</p>
                             <p> DISLIKES: {post.dislikesCount}</p>
                             <p> COMENTÁRIOS: {post.commentsCount}</p>

@@ -28,13 +28,13 @@ export const LoginPage = () => {
             // goToFeedPage(navigator);
 
             // Verificar e imprimir a mensagem de resposta
-            response.message &&
-                console.log('Mensagem de resposta do login:', response.message);
+            // response.message &&
+            //     console.log('Mensagem de resposta do login:', response.message);
 
             // Verificar e imprimir o token de resposta
             response.token &&
                 (() => {
-                    console.log('Token de resposta do login:', response.token);
+                    // console.log('Token de resposta do login:', response.token);
                     localStorage.setItem('token', response.token);
                     goToFeedPage(navigator);
                 })();
