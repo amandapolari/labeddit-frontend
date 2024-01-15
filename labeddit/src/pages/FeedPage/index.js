@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router';
 import { useProtectPage } from '../../hooks/useProtectPage';
 import useRequestData from '../../hooks/useRequestData';
 import { Logout, urlPosts } from '../../constants/constants';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { CreatePost, DeletePost } from '../../services/api';
+import { CreatePost, DeletePost, editPost } from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Loading } from '../../components';
 import { goToDetailsPage } from '../../routes/coordinator';
@@ -17,6 +17,8 @@ export const FeedPage = () => {
         content: '',
     });
 
+    const [editingContent, setEditingContent] = useState(''); // Novo estado para o conteúdo durante a edição
+
     const context = useContext(GlobalContext);
     const {
         dataReceivedFromApi,
@@ -28,6 +30,10 @@ export const FeedPage = () => {
     } = context;
 
     const [data, isLoading, isError] = useRequestData(urlPosts, isUpdate);
+
+    const [isEditing, setIsEditing] = useState(false);
+
+    const [idPostToEdit, setIdPostToEdit] = useState('');
 
     useEffect(() => {
         if (posts.length === 0 && !isLoading && !isError && data) {
@@ -98,24 +104,29 @@ export const FeedPage = () => {
         }
     };
 
-    // const handleEditPost = async (body, postId) => {
-    //     try {
-    //         const response = await editPost(body, postId);
+    const handleEditButtonClick = (postId) => {
+        const postToEdit = posts.find((post) => post.id === postId);
+        setIsEditing(true);
+        setIdPostToEdit(postId);
+        setEditingContent(postToEdit.content); // Inicializar o conteúdo do formulário de edição
+    };
 
-    //         console.log('Resposta do delete:', response);
+    const handleEdit = async (postId) => {
+        try {
+            const body = {
+                content: editingContent, // Usar o estado de edição
+            };
 
-    //         setIsUpdate(!isUpdate);
-    //     } catch (error) {
-    //         console.log('Resposta de erro:', error);
-    //         error.response &&
-    //             console.log('Dados de resposta de erro:', error.response.data);
-    //         error.response?.data?.[0]?.message &&
-    //             console.log(
-    //                 'Mensagem de erro:',
-    //                 error.response.data[0].message
-    //             );
-    //     }
-    // };
+            await editPost(body, postId);
+
+            setIsEditing(false);
+            setIdPostToEdit('');
+            setIsUpdate(!isUpdate);
+            setEditingContent(''); // Limpar o conteúdo de edição após a edição
+        } catch (error) {
+            console.log('Erro ao salvar a edição:', error);
+        }
+    };
 
     return (
         <div>
@@ -154,7 +165,10 @@ export const FeedPage = () => {
                                 CRIADOR DO POST:
                                 {post && post.creator && post.creator.nickname}
                             </p>
-                            <p>CONTEUDO: {post.content}</p>
+                            {/* <p>CONTEUDO: {post.content}</p> */}
+                            {idPostToEdit === post.id && isEditing
+                                ? ''
+                                : post.content}
                             {post.isCurrentUserPost ? (
                                 <button
                                     onClick={(event) => {
@@ -167,11 +181,42 @@ export const FeedPage = () => {
                             ) : (
                                 ''
                             )}
-                            {/* {post.isCurrentUserPost ? (
-                                <button>Editar</button>
+
+                            {post.isCurrentUserPost && (
+                                <button
+                                    onClick={() =>
+                                        handleEditButtonClick(post.id)
+                                    }
+                                >
+                                    Editar
+                                </button>
+                            )}
+
+                            {idPostToEdit === post.id && isEditing ? (
+                                <div>
+                                    <form
+                                        onSubmit={(event) => {
+                                            event.preventDefault();
+                                            handleEdit(post.id);
+                                        }}
+                                    >
+                                        <textarea
+                                            value={editingContent} // Usar o valor de edição
+                                            onChange={(event) =>
+                                                setEditingContent(
+                                                    event.target.value
+                                                )
+                                            }
+                                            name="content"
+                                        />
+                                        <br />
+                                        <button type="submit">Salvar</button>
+                                    </form>
+                                </div>
                             ) : (
                                 ''
-                            )} */}
+                            )}
+
                             <p> LIKES: {post.likesCount}</p>
                             <p> DISLIKES: {post.dislikesCount}</p>
                             <p> COMENTÁRIOS: {post.commentsCount}</p>

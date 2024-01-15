@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProtectPage } from '../../hooks/useProtectPage';
 import useRequestData from '../../hooks/useRequestData';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 import { urlPosts } from '../../constants/constants';
-import { CreateComment, DeleteComment } from '../../services/api';
+import { CreateComment, DeleteComment, editComment } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
 import { Error, Loading } from '../../components';
 
@@ -29,6 +29,15 @@ export const DetailsPage = () => {
     const [form, onChange, resetForm] = useForm({
         content: '',
     });
+
+    // Novo estado para o conteúdo durante a edição:
+    const [editingContent, setEditingContent] = useState('');
+
+    // Novo estado para o controle da edição:
+    const [isEditing, setIsEditing] = useState(false);
+
+    // Novo estado para o id do post durante a edição:
+    const [idCommentToEdit, setIdCommentToEdit] = useState('');
 
     const [data, isLoading, isError] = useRequestData(urlDetails, isUpdate);
 
@@ -112,6 +121,33 @@ export const DetailsPage = () => {
         }
     };
 
+    const handleEditButtonClick = (commentId) => {
+        // const commentToEdit = posts.find((post) => post.id === commentId);
+        const commentToEdit = posts.comments.find(
+            (comment) => comment.id === commentId
+        );
+        setIsEditing(true);
+        setIdCommentToEdit(commentId);
+        setEditingContent(commentToEdit.content); // Inicializar o conteúdo do formulário de edição
+    };
+
+    const handleEdit = async (commentId) => {
+        try {
+            const body = {
+                content: editingContent, // Usar o estado de edição
+            };
+
+            await editComment(body, commentId);
+
+            setIsEditing(false);
+            setIdCommentToEdit('');
+            setIsUpdate(!isUpdate);
+            setEditingContent(''); // Limpar o conteúdo de edição após a edição
+        } catch (error) {
+            console.log('Erro ao salvar a edição:', error);
+        }
+    };
+
     return (
         <div>
             <p>DetailsPage</p>
@@ -146,7 +182,9 @@ export const DetailsPage = () => {
                             <div key={comment.id}>
                                 <hr />
                                 <p>{comment.creator.nickname}</p>
-                                {comment.content}
+                                {idCommentToEdit === comment.id && isEditing
+                                    ? ''
+                                    : comment.content}
                                 {comment.isCurrentUserPost ? (
                                     <button
                                         onClick={(event) => {
@@ -159,6 +197,44 @@ export const DetailsPage = () => {
                                 ) : (
                                     ''
                                 )}
+
+                                {comment.isCurrentUserPost && (
+                                    <button
+                                        onClick={() =>
+                                            handleEditButtonClick(comment.id)
+                                        }
+                                    >
+                                        Editar
+                                    </button>
+                                )}
+
+                                {idCommentToEdit === comment.id && isEditing ? (
+                                    <div>
+                                        <form
+                                            onSubmit={(event) => {
+                                                event.preventDefault();
+                                                handleEdit(comment.id);
+                                            }}
+                                        >
+                                            <textarea
+                                                value={editingContent} // Usar o valor de edição
+                                                onChange={(event) =>
+                                                    setEditingContent(
+                                                        event.target.value
+                                                    )
+                                                }
+                                                name="content"
+                                            />
+                                            <br />
+                                            <button type="submit">
+                                                Salvar
+                                            </button>
+                                        </form>
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
+
                                 <p>LIKE: {comment.likesCount}</p>
                                 <p>DISLIKE: {comment.dislikesCount}</p>
                                 <hr />
