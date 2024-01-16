@@ -71,7 +71,7 @@ export const DeleteComment = async (id) => {
     }
 };
 
-export const editPost = async (body, id) => {
+export const EditPost = async (body, id) => {
     try {
         const { data } = await axios.put(`${BASE_URL}posts/${id}`, body, {
             headers: {
@@ -84,7 +84,7 @@ export const editPost = async (body, id) => {
     }
 };
 
-export const editComment = async (body, id) => {
+export const EditComment = async (body, id) => {
     try {
         const { data } = await axios.put(`${BASE_URL}comments/${id}`, body, {
             headers: {
@@ -97,7 +97,7 @@ export const editComment = async (body, id) => {
     }
 };
 
-export const likeAndDislikePost = async (body, id) => {
+export const LikeAndDislikePost = async (body, id) => {
     try {
         const { data } = await axios.put(`${BASE_URL}posts/${id}/like`, body, {
             headers: {
@@ -110,7 +110,7 @@ export const likeAndDislikePost = async (body, id) => {
     }
 };
 
-export const likeAndDislikeComment = async (body, id) => {
+export const LikeAndDislikeComment = async (body, id) => {
     try {
         const { data } = await axios.put(
             `${BASE_URL}comments/${id}/like`,

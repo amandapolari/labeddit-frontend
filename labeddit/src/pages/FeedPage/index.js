@@ -7,12 +7,12 @@ import { useForm } from '../../hooks/useForm';
 import {
     CreatePost,
     DeletePost,
-    editPost,
-    likeAndDislikePost,
+    EditPost,
+    LikeAndDislikePost,
 } from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Loading } from '../../components';
-import { goToDetailsPage } from '../../routes/coordinator';
+import { goToCommentsPage } from '../../routes/coordinator';
 
 export const FeedPage = () => {
     const navigator = useNavigate();
@@ -122,7 +122,7 @@ export const FeedPage = () => {
                 content: editingContent, // Usar o estado de edição
             };
 
-            await editPost(body, postId);
+            await EditPost(body, postId);
 
             setIsEditing(false);
             setIdPostToEdit('');
@@ -135,13 +135,13 @@ export const FeedPage = () => {
 
     const handleLike = async (postId) => {
         const body = { like: true };
-        await likeAndDislikePost(body, postId);
+        await LikeAndDislikePost(body, postId);
         setIsUpdate(!isUpdate);
     };
 
     const handleDislike = async (postId) => {
         const body = { like: false };
-        await likeAndDislikePost(body, postId);
+        await LikeAndDislikePost(body, postId);
         setIsUpdate(!isUpdate);
     };
 
@@ -245,10 +245,10 @@ export const FeedPage = () => {
                             <p>{post.id}</p>
                             <button
                                 onClick={() => {
-                                    goToDetailsPage(navigator, post.id);
+                                    goToCommentsPage(navigator, post.id);
                                 }}
                             >
-                                + DETALHES
+                                Comentários
                             </button>
                             <hr />
                         </div>

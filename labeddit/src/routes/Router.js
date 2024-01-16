@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from '../components';
+import { PATH } from '../constants/constants';
 
 import {
     LoginPage,
     SignupPage,
     FeedPage,
-    DetailsPage,
+    CommentsPage,
     ErrorsPage,
 } from '../pages';
-import { PATH } from '../constants/constants';
 
 export const Router = () => {
     return (
@@ -19,7 +19,7 @@ export const Router = () => {
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/feedpage" element={<FeedPage />} />
-                <Route path="/details/:id" element={<DetailsPage />} />
+                <Route path="/comments/:id" element={<CommentsPage />} />
                 <Route path="*" element={<ErrorsPage />} />
             </Routes>
         </BrowserRouter>

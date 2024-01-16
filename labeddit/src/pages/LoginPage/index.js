@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const LoginPage = () => {
     const navigator = useNavigate();
 
-    const [form, onChange, resetForm] = useForm({
+    const [form, setForm, onChange, resetForm] = useForm({
         email: '',
         password: '',
     });
@@ -44,7 +44,6 @@ export const LoginPage = () => {
             // console.log(error.response.data[0].message);
 
             // console.log('Resposta de erro:', error);
-            
 
             // error.request.response && console.log(error.request.response);
 
@@ -62,9 +61,6 @@ export const LoginPage = () => {
                     error.response.data[0].message
                 );
         }
-
-        // =============
-        // =============
     };
 
     return (
@@ -110,6 +106,20 @@ export const LoginPage = () => {
                 <br />
                 <button type="button" onClick={resetForm}>
                     Resetar Formulário
+                </button>
+
+                <h3>Conta de teste</h3>
+                <p>amanda@gmail.com</p>
+                <p>Amanda@123</p>
+                <button
+                    onClick={() => {
+                        setForm({
+                            email: 'amanda@gmail.com',
+                            password: 'Amanda@123',
+                        });
+                    }}
+                >
+                    Autopreencher
                 </button>
             </form>
         </div>

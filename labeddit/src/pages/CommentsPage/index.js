@@ -7,19 +7,19 @@ import { urlPosts } from '../../constants/constants';
 import {
     CreateComment,
     DeleteComment,
-    editComment,
-    likeAndDislikeComment,
+    EditComment,
+    LikeAndDislikeComment,
 } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
 import { Error, Loading } from '../../components';
 
-export const DetailsPage = () => {
+export const CommentsPage = () => {
     const navigator = useNavigate();
     useProtectPage(navigator);
 
     const params = useParams();
     const id = params.id;
-    const urlDetails = `${urlPosts}/${id}`;
+    const urlComments = `${urlPosts}/${id}`;
 
     const context = useContext(GlobalContext);
     const {
@@ -44,7 +44,7 @@ export const DetailsPage = () => {
     // Novo estado para o id do post durante a edição:
     const [idCommentToEdit, setIdCommentToEdit] = useState('');
 
-    const [data, isLoading, isError] = useRequestData(urlDetails, isUpdate);
+    const [data, isLoading, isError] = useRequestData(urlComments, isUpdate);
 
     useEffect(() => {
         if (posts.length === 0 && !isLoading && !isError && data) {
@@ -142,7 +142,7 @@ export const DetailsPage = () => {
                 content: editingContent, // Usar o estado de edição
             };
 
-            await editComment(body, commentId);
+            await EditComment(body, commentId);
 
             setIsEditing(false);
             setIdCommentToEdit('');
@@ -155,19 +155,19 @@ export const DetailsPage = () => {
 
     const handleLike = async (commentId) => {
         const body = { like: true };
-        await likeAndDislikeComment(body, commentId);
+        await LikeAndDislikeComment(body, commentId);
         setIsUpdate(!isUpdate);
     };
 
     const handleDislike = async (commentId) => {
         const body = { like: false };
-        await likeAndDislikeComment(body, commentId);
+        await LikeAndDislikeComment(body, commentId);
         setIsUpdate(!isUpdate);
     };
 
     return (
         <div>
-            <p>DetailsPage</p>
+            <p>Comments Page</p>
             {/* {posts && console.log(posts)} */}
             <form onSubmit={handleSubmit}>
                 <textarea

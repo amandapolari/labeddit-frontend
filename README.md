@@ -4,4 +4,4 @@
 
 ## Fluxograma das Páginas
 
-![Alt text](./labeddit/src/assets/images/flow_pages.png)
+![Fluxograma de Páginas](./labeddit/src/assets/images/flow_pages.png)

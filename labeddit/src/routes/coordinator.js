@@ -10,8 +10,8 @@ export const goToFeedPage = (navigator) => {
     navigator('/feedpage');
 };
 
-export const goToDetailsPage = (navigator, id) => {
-    navigator(`/details/${id}`);
+export const goToCommentsPage = (navigator, id) => {
+    navigator(`/comments/${id}`);
 };
 
 export const goToErrorsPage = (navigator) => {
