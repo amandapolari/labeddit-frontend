@@ -1,15 +1,24 @@
 import GlobalContext from './GlobalContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const GlobalState = ({ children }) => {
-    const [example, setExample] = useState([]);
+    const [dataReceivedFromApi, setDataReceivedFromApi] = useState();
+    const [posts, setPosts] = useState([]);
+    const [isUpdate, setIsUpdate] = useState(false);
 
-    useEffect(() => {
-        setExample(['name1', 'name2', 'name3', 'name4']);
-    }, []);
+    // const filteredPosts = async (text) => {
+    //     const postsFiltered = posts.map((post) => {
+    //         return post.content.includes(text);
+    //     });
+    // };
 
     const datas = {
-        example,
+        dataReceivedFromApi,
+        setDataReceivedFromApi,
+        posts,
+        setPosts,
+        isUpdate,
+        setIsUpdate,
     };
 
     return (
