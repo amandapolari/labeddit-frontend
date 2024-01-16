@@ -96,3 +96,33 @@ export const editComment = async (body, id) => {
         console.log('Resposta de erro:', error);
     }
 };
+
+export const likeAndDislikePost = async (body, id) => {
+    try {
+        const { data } = await axios.put(`${BASE_URL}posts/${id}/like`, body, {
+            headers: {
+                Authorization: localStorage.getItem('token'),
+            },
+        });
+        return data;
+    } catch (error) {
+        console.log('Resposta de erro:', error);
+    }
+};
+
+export const likeAndDislikeComment = async (body, id) => {
+    try {
+        const { data } = await axios.put(
+            `${BASE_URL}comments/${id}/like`,
+            body,
+            {
+                headers: {
+                    Authorization: localStorage.getItem('token'),
+                },
+            }
+        );
+        return data;
+    } catch (error) {
+        console.log('Resposta de erro:', error);
+    }
+};

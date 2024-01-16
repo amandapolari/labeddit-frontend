@@ -4,7 +4,12 @@ import useRequestData from '../../hooks/useRequestData';
 import { Logout, urlPosts } from '../../constants/constants';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { CreatePost, DeletePost, editPost } from '../../services/api';
+import {
+    CreatePost,
+    DeletePost,
+    editPost,
+    likeAndDislikePost,
+} from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Loading } from '../../components';
 import { goToDetailsPage } from '../../routes/coordinator';
@@ -128,6 +133,18 @@ export const FeedPage = () => {
         }
     };
 
+    const handleLike = async (postId) => {
+        const body = { like: true };
+        await likeAndDislikePost(body, postId);
+        setIsUpdate(!isUpdate);
+    };
+
+    const handleDislike = async (postId) => {
+        const body = { like: false };
+        await likeAndDislikePost(body, postId);
+        setIsUpdate(!isUpdate);
+    };
+
     return (
         <div>
             <button
@@ -201,7 +218,7 @@ export const FeedPage = () => {
                                         }}
                                     >
                                         <textarea
-                                            value={editingContent} // Usar o valor de edição
+                                            value={editingContent}
                                             onChange={(event) =>
                                                 setEditingContent(
                                                     event.target.value
@@ -216,9 +233,14 @@ export const FeedPage = () => {
                             ) : (
                                 ''
                             )}
-
                             <p> LIKES: {post.likesCount}</p>
                             <p> DISLIKES: {post.dislikesCount}</p>
+                            <button onClick={() => handleLike(post.id)}>
+                                Like
+                            </button>
+                            <button onClick={() => handleDislike(post.id)}>
+                                Dislike
+                            </button>
                             <p> COMENTÁRIOS: {post.commentsCount}</p>
                             <p>{post.id}</p>
                             <button

@@ -16,7 +16,7 @@ const useRequestData = (path, isUpdate) => {
                     },
                 });
 
-                // console.log('dados da API:', response.data);
+                console.log('dados da API:', response.data);
                 response.data.results
                     ? setData(response.data.results)
                     : setData(response.data);

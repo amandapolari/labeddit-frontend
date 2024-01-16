@@ -4,7 +4,12 @@ import useRequestData from '../../hooks/useRequestData';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 import { urlPosts } from '../../constants/constants';
-import { CreateComment, DeleteComment, editComment } from '../../services/api';
+import {
+    CreateComment,
+    DeleteComment,
+    editComment,
+    likeAndDislikeComment,
+} from '../../services/api';
 import { useForm } from '../../hooks/useForm';
 import { Error, Loading } from '../../components';
 
@@ -148,6 +153,18 @@ export const DetailsPage = () => {
         }
     };
 
+    const handleLike = async (commentId) => {
+        const body = { like: true };
+        await likeAndDislikeComment(body, commentId);
+        setIsUpdate(!isUpdate);
+    };
+
+    const handleDislike = async (commentId) => {
+        const body = { like: false };
+        await likeAndDislikeComment(body, commentId);
+        setIsUpdate(!isUpdate);
+    };
+
     return (
         <div>
             <p>DetailsPage</p>
@@ -181,7 +198,7 @@ export const DetailsPage = () => {
                         posts.comments.map((comment) => (
                             <div key={comment.id}>
                                 <hr />
-                                <p>{comment.creator.nickname}</p>
+                                <p>{comment && comment.creator.nickname}</p>
                                 {idCommentToEdit === comment.id && isEditing
                                     ? ''
                                     : comment.content}
@@ -237,6 +254,14 @@ export const DetailsPage = () => {
 
                                 <p>LIKE: {comment.likesCount}</p>
                                 <p>DISLIKE: {comment.dislikesCount}</p>
+                                <button onClick={() => handleLike(comment.id)}>
+                                    Like
+                                </button>
+                                <button
+                                    onClick={() => handleDislike(comment.id)}
+                                >
+                                    Dislike
+                                </button>
                                 <hr />
                             </div>
                         ))}{' '}
