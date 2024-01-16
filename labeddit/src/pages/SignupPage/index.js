@@ -1,13 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import GlobalContext from '../../contexts/GlobalContext';
 
 export const SignupPage = () => {
+    const context = useContext(GlobalContext);
+    const { errorMessage, setErrorMessage } = context;
+
+    // console.log('errorMessage:', errorMessage);
+
     const navigator = useNavigate();
 
-    const [form, onChange, resetForm] = useForm({
+    const [form, setForm, onChange, resetForm] = useForm({
         nickname: '',
         email: '',
         password: '',
@@ -37,37 +44,50 @@ export const SignupPage = () => {
                 password: form.password,
             };
 
-            const response = await Signup(body);
+            // console.log('body:', body);
 
-            response.message &&
-                console.log(
-                    'Mensagem de resposta do signup:',
-                    response.message
-                );
+            const response = await Signup(body, setErrorMessage);
 
-            response.token &&
+            if (response.message && response.token) {
                 (() => {
-                    console.log('Token de resposta do signup:', response.token);
                     localStorage.setItem('token', response.token);
                     goToFeedPage(navigator);
                 })();
+            }
+
+            // response.message &&
+            //     console.log(
+            //         'Mensagem de resposta do signup:',
+            //         response.message
+            //     );
+
+            // response.token &&
+            //     (() => {
+            //         console.log('Token de resposta do signup:', response.token);
+            //         localStorage.setItem('token', response.token);
+            //         goToFeedPage(navigator);
+            //     })();
         } catch (error) {
-            console.log('Resposta de erro:', error);
-
-            error.response &&
-                console.log('Dados de resposta de erro:', error.response.data);
-
-            error.response?.data?.[0]?.message &&
-                console.log(
-                    'Mensagem de erro:',
-                    error.response.data[0].message
-                );
+            // console.log('Resposta de erro:', error);
+            //     console.log('Resposta de erro:', error);
+            //     error.response &&
+            //         console.log('Dados de resposta de erro:', error.response.data);
+            //     error.response?.data?.[0]?.message &&
+            //         console.log(
+            //             'Mensagem de erro:',
+            //             error.response.data[0].message
+            //         );
         }
     };
 
     return (
         <div>
             <p>SignupPage</p>
+
+            <br />
+            <br />
+
+            {errorMessage && errorMessage}
 
             <button
                 type="button"
@@ -83,44 +103,36 @@ export const SignupPage = () => {
             <form onSubmit={handleSubmit}>
                 <label>Apelido</label>
                 <input
+                    type="text"
                     name="nickname"
                     value={form.nickname}
                     onChange={onChange}
-                    placeholder="Apelido"
-                    required
-                    type="text"
                 />
 
                 <br />
 
                 <label>E-mail</label>
                 <input
+                    type="text"
                     name="email"
                     value={form.email}
                     onChange={onChange}
-                    placeholder="E-mail"
-                    required
-                    type="email"
                 />
 
                 <br />
                 <label>Senha</label>
                 <input
+                    type="text"
                     name="password"
                     value={form.password}
                     onChange={onChange}
-                    placeholder="Senha"
-                    required
-                    type="text"
                 />
 
                 <br />
 
                 <div>
-                    {/* Rótulo do checkbox */}
                     <label>
                         Checkbox Label:
-                        {/* O próprio checkbox */}
                         <input
                             type="checkbox"
                             checked={isChecked}

@@ -1,15 +1,23 @@
+/* eslint-disable no-unused-vars */
+import { useContext, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToSignupPage } from '../../routes/coordinator';
 import { Login } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import GlobalContext from '../../contexts/GlobalContext';
 
 export const LoginPage = () => {
+    const context = useContext(GlobalContext);
+    const { errorMessage, setErrorMessage } = context;
+
     const navigator = useNavigate();
 
     const [form, setForm, onChange, resetForm] = useForm({
         email: '',
         password: '',
     });
+
+    const [isShowErrorMessage, setIsShowErrorMessage] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,47 +27,15 @@ export const LoginPage = () => {
                 password: form.password,
             };
 
-            const response = await Login(body);
-            // console.log('Resposta do login:', response);
-            // console.log(response.message);
-            // console.log(response.token);
-
-            // localStorage.setItem('token', response.token);
-            // goToFeedPage(navigator);
-
-            // Verificar e imprimir a mensagem de resposta
-            // response.message &&
-            //     console.log('Mensagem de resposta do login:', response.message);
-
-            // Verificar e imprimir o token de resposta
-            response.token &&
+            const response = await Login(body, setErrorMessage);
+            if (response.message && response.token) {
                 (() => {
-                    // console.log('Token de resposta do login:', response.token);
                     localStorage.setItem('token', response.token);
                     goToFeedPage(navigator);
                 })();
+            }
         } catch (error) {
             // console.log('Resposta de erro:', error);
-            // console.log(error.response.data);
-            // console.log(error.response.data[0].message);
-
-            // console.log('Resposta de erro:', error);
-
-            // error.request.response && console.log(error.request.response);
-
-            // Verificar e imprimir os dados de resposta de erro
-            error.response &&
-                console.log('Dados de resposta de erro:', error.response.data);
-
-            // error.response.data && console.log(error.response.data);
-            // error.response.data[0].message && console.log(error.response.data[0].message);
-
-            // Verificar e imprimir a mensagem de erro
-            error.response?.data?.[0]?.message &&
-                console.log(
-                    'Mensagem de erro:',
-                    error.response.data[0].message
-                );
         }
     };
 
@@ -67,17 +43,7 @@ export const LoginPage = () => {
         <div>
             <h1>LoginPage</h1>
 
-            <br />
-            <br />
-
-            <button
-                type="button"
-                onClick={() => {
-                    goToSignupPage(navigator);
-                }}
-            >
-                Cadastrar
-            </button>
+            {errorMessage}
 
             <br />
             <br />
@@ -121,6 +87,18 @@ export const LoginPage = () => {
                     }}
                 >
                     Autopreencher
+                </button>
+
+                <br />
+                <br />
+
+                <button
+                    type="button"
+                    onClick={() => {
+                        goToSignupPage(navigator);
+                    }}
+                >
+                    Cadastrar
                 </button>
             </form>
         </div>

@@ -5,6 +5,7 @@ const GlobalState = ({ children }) => {
     const [dataReceivedFromApi, setDataReceivedFromApi] = useState();
     const [posts, setPosts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     // const filteredPosts = async (text) => {
     //     const postsFiltered = posts.map((post) => {
@@ -19,6 +20,8 @@ const GlobalState = ({ children }) => {
         setPosts,
         isUpdate,
         setIsUpdate,
+        errorMessage,
+        setErrorMessage,
     };
 
     return (

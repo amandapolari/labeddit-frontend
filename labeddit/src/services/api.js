@@ -1,21 +1,42 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { BASE_URL } from '../constants/constants';
 
-export const Login = async (body) => {
+const handleRequestError = (error, setErrorMessage) => {
+    if (error instanceof AxiosError) {
+        console.log('ERRO DA REQUISIÇÃO:', error);
+        const arrayOfErrors = error.response.data;
+
+        if (Array.isArray(arrayOfErrors)) {
+            const messagesOfErrors = arrayOfErrors.map(
+                (error) => error.message
+            );
+
+            const messageOfError = messagesOfErrors.join('. \n');
+
+            setErrorMessage(messageOfError);
+        } else {
+            setErrorMessage(error.response.data);
+        }
+    } else {
+        console.error('Erro inesperado:', error);
+    }
+};
+
+export const Login = async (body, setErrorMessage) => {
     try {
         const { data } = await axios.post(`${BASE_URL}users/login`, body);
         return data;
     } catch (error) {
-        console.log('Resposta de erro:', error);
+        handleRequestError(error, setErrorMessage);
     }
 };
 
-export const Signup = async (body) => {
+export const Signup = async (body, setErrorMessage) => {
     try {
         const { data } = await axios.post(`${BASE_URL}users/signup`, body);
         return data;
     } catch (error) {
-        console.log('Resposta de erro:', error);
+        handleRequestError(error, setErrorMessage);
     }
 };
 
@@ -126,3 +147,5 @@ export const LikeAndDislikeComment = async (body, id) => {
         console.log('Resposta de erro:', error);
     }
 };
+
+// export default Login;
