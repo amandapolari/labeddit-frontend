@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToSignupPage } from '../../routes/coordinator';
 import { Login } from '../../services/api';
@@ -7,17 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../../contexts/GlobalContext';
 
 export const LoginPage = () => {
+    const navigator = useNavigate();
     const context = useContext(GlobalContext);
     const { errorMessage, setErrorMessage } = context;
-
-    const navigator = useNavigate();
 
     const [form, setForm, onChange, resetForm] = useForm({
         email: '',
         password: '',
     });
 
-    const [isShowErrorMessage, setIsShowErrorMessage] = useState(false);
+    useEffect(() => {
+        setErrorMessage('');
+    }, [form]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -34,18 +36,15 @@ export const LoginPage = () => {
                     goToFeedPage(navigator);
                 })();
             }
-        } catch (error) {
-            // console.log('Resposta de erro:', error);
-        }
+        } catch (error) {}
     };
 
     return (
         <div>
             <h1>LoginPage</h1>
 
-            {errorMessage}
+            {errorMessage && <p>{errorMessage}</p>}
 
-            <br />
             <br />
             <form onSubmit={handleSubmit}>
                 <label>

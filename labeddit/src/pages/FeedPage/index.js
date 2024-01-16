@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router';
 import { useProtectPage } from '../../hooks/useProtectPage';
 import useRequestData from '../../hooks/useRequestData';
@@ -18,12 +20,6 @@ export const FeedPage = () => {
     const navigator = useNavigate();
     useProtectPage(navigator);
 
-    const [form, onChange, resetForm] = useForm({
-        content: '',
-    });
-
-    const [editingContent, setEditingContent] = useState(''); // Novo estado para o conteúdo durante a edição
-
     const context = useContext(GlobalContext);
     const {
         dataReceivedFromApi,
@@ -32,7 +28,21 @@ export const FeedPage = () => {
         setPosts,
         isUpdate,
         setIsUpdate,
+        errorMessage,
+        setErrorMessage,
+        errorMessagePost,
+        setErrorMessagePost,
     } = context;
+
+    const [form, onChange, resetForm] = useForm({
+        content: '',
+    });
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [form]);
+
+    const [editingContent, setEditingContent] = useState('');
 
     const [data, isLoading, isError] = useRequestData(urlPosts, isUpdate);
 
@@ -40,12 +50,13 @@ export const FeedPage = () => {
 
     const [idPostToEdit, setIdPostToEdit] = useState('');
 
+    const [idPostMessageError, setIdPostMessageError] = useState('');
+
     useEffect(() => {
         if (posts.length === 0 && !isLoading && !isError && data) {
             setDataReceivedFromApi(data);
             setPosts(data);
         } else {
-            // setPosts(dataReceivedFromApi);
             setPosts(data);
         }
     }, [
@@ -66,28 +77,12 @@ export const FeedPage = () => {
                 content: form.content,
             };
 
-            const response = await CreatePost(body);
+            const response = await CreatePost(body, setErrorMessage);
 
             response && resetForm();
 
             setIsUpdate(!isUpdate);
-
-            // console.log('Resposta do post:', response);
-
-            // response.message &&
-            //     console.log('Mensagem de resposta do post:', response.message);
-
-            // console.log('Resposta do post:', response);
-        } catch (error) {
-            console.log('Resposta de erro:', error);
-            error.response &&
-                console.log('Dados de resposta de erro:', error.response.data);
-            error.response?.data?.[0]?.message &&
-                console.log(
-                    'Mensagem de erro:',
-                    error.response.data[0].message
-                );
-        }
+        } catch (error) {}
     };
 
     const handleDeletePost = async (postId) => {
@@ -113,13 +108,13 @@ export const FeedPage = () => {
         const postToEdit = posts.find((post) => post.id === postId);
         setIsEditing(true);
         setIdPostToEdit(postId);
-        setEditingContent(postToEdit.content); // Inicializar o conteúdo do formulário de edição
+        setEditingContent(postToEdit.content);
     };
 
     const handleEdit = async (postId) => {
         try {
             const body = {
-                content: editingContent, // Usar o estado de edição
+                content: editingContent,
             };
 
             await EditPost(body, postId);
@@ -127,7 +122,7 @@ export const FeedPage = () => {
             setIsEditing(false);
             setIdPostToEdit('');
             setIsUpdate(!isUpdate);
-            setEditingContent(''); // Limpar o conteúdo de edição após a edição
+            setEditingContent('');
         } catch (error) {
             console.log('Erro ao salvar a edição:', error);
         }
@@ -135,14 +130,24 @@ export const FeedPage = () => {
 
     const handleLike = async (postId) => {
         const body = { like: true };
-        await LikeAndDislikePost(body, postId);
+        await LikeAndDislikePost(body, postId, setErrorMessagePost);
         setIsUpdate(!isUpdate);
+        setIdPostMessageError(postId);
+        setTimeout(() => {
+            setErrorMessagePost('');
+            setIdPostMessageError('');
+        }, 3000);
     };
 
     const handleDislike = async (postId) => {
         const body = { like: false };
-        await LikeAndDislikePost(body, postId);
+        await LikeAndDislikePost(body, postId, setErrorMessagePost);
         setIsUpdate(!isUpdate);
+        setIdPostMessageError(postId);
+        setTimeout(() => {
+            setErrorMessagePost('');
+            setIdPostMessageError('');
+        }, 3000);
     };
 
     return (
@@ -157,6 +162,9 @@ export const FeedPage = () => {
             </button>
             <br />
             <p>FeedPage</p>
+
+            {errorMessage && <p>{errorMessage}</p>}
+
             <form onSubmit={handleSubmit}>
                 <textarea
                     placeholder="Escreva seu post"
@@ -182,7 +190,6 @@ export const FeedPage = () => {
                                 CRIADOR DO POST:
                                 {post && post.creator && post.creator.nickname}
                             </p>
-                            {/* <p>CONTEUDO: {post.content}</p> */}
                             {idPostToEdit === post.id && isEditing
                                 ? ''
                                 : post.content}
@@ -241,8 +248,12 @@ export const FeedPage = () => {
                             <button onClick={() => handleDislike(post.id)}>
                                 Dislike
                             </button>
+
+                            {post.isCurrentUserPost &&
+                                idPostMessageError === post.id &&
+                                errorMessagePost && <p>{errorMessagePost}</p>}
+
                             <p> COMENTÁRIOS: {post.commentsCount}</p>
-                            <p>{post.id}</p>
                             <button
                                 onClick={() => {
                                     goToCommentsPage(navigator, post.id);

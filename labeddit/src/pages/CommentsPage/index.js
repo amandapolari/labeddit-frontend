@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProtectPage } from '../../hooks/useProtectPage';
 import useRequestData from '../../hooks/useRequestData';
@@ -29,21 +30,20 @@ export const CommentsPage = () => {
         setPosts,
         isUpdate,
         setIsUpdate,
+        errorMessage,
+        setErrorMessage,
+        errorMessageComment,
+        setErrorMessageComment,
     } = context;
 
     const [form, onChange, resetForm] = useForm({
         content: '',
     });
 
-    // Novo estado para o conteúdo durante a edição:
     const [editingContent, setEditingContent] = useState('');
-
-    // Novo estado para o controle da edição:
     const [isEditing, setIsEditing] = useState(false);
-
-    // Novo estado para o id do post durante a edição:
     const [idCommentToEdit, setIdCommentToEdit] = useState('');
-
+    const [idCommentMessageError, setIdCommentMessageError] = useState('');
     const [data, isLoading, isError] = useRequestData(urlComments, isUpdate);
 
     useEffect(() => {
@@ -51,7 +51,6 @@ export const CommentsPage = () => {
             setDataReceivedFromApi(data);
             setPosts(data);
         } else {
-            // setPosts(dataReceivedFromApi);
             setPosts(data);
         }
     }, [
@@ -65,38 +64,20 @@ export const CommentsPage = () => {
         isUpdate,
     ]);
 
+    useEffect(() => {
+        setErrorMessage('');
+    }, [form]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const body = {
                 content: form.content,
             };
-
-            const response = await CreateComment(body, id);
-
+            const response = await CreateComment(body, id, setErrorMessage);
             response && resetForm();
-
             setIsUpdate(!isUpdate);
-
-            // console.log('Resposta do post:', response);
-
-            // response.message &&
-            //     console.log(
-            //         'Mensagem de resposta do comentário:',
-            //         response.message
-            //     );
-
-            // console.log('Resposta do post:', response);
-        } catch (error) {
-            console.log('Resposta de erro:', error);
-            error.response &&
-                // console.log('Dados de resposta de erro:', error.response.data);
-                error.response?.data?.[0]?.message &&
-                console.log(
-                    'Mensagem de erro:',
-                    error.response.data[0].message
-                );
-        }
+        } catch (error) {}
     };
 
     const handleDeleteComment = async (id) => {
@@ -106,40 +87,22 @@ export const CommentsPage = () => {
             setIsUpdate(!isUpdate);
 
             console.log('Resposta do post:', response);
-
-            // response.message &&
-            //     console.log(
-            //         'Mensagem de resposta do comentário:',
-            //         response.message
-            //     );
-
-            // console.log('Resposta do post:', response);
-        } catch (error) {
-            console.log('Resposta de erro:', error);
-            error.response &&
-                // console.log('Dados de resposta de erro:', error.response.data);
-                error.response?.data?.[0]?.message &&
-                console.log(
-                    'Mensagem de erro:',
-                    error.response.data[0].message
-                );
-        }
+        } catch (error) {}
     };
 
     const handleEditButtonClick = (commentId) => {
-        // const commentToEdit = posts.find((post) => post.id === commentId);
         const commentToEdit = posts.comments.find(
             (comment) => comment.id === commentId
         );
         setIsEditing(true);
         setIdCommentToEdit(commentId);
-        setEditingContent(commentToEdit.content); // Inicializar o conteúdo do formulário de edição
+        setEditingContent(commentToEdit.content);
     };
 
     const handleEdit = async (commentId) => {
         try {
             const body = {
-                content: editingContent, // Usar o estado de edição
+                content: editingContent,
             };
 
             await EditComment(body, commentId);
@@ -147,7 +110,7 @@ export const CommentsPage = () => {
             setIsEditing(false);
             setIdCommentToEdit('');
             setIsUpdate(!isUpdate);
-            setEditingContent(''); // Limpar o conteúdo de edição após a edição
+            setEditingContent('');
         } catch (error) {
             console.log('Erro ao salvar a edição:', error);
         }
@@ -155,20 +118,32 @@ export const CommentsPage = () => {
 
     const handleLike = async (commentId) => {
         const body = { like: true };
-        await LikeAndDislikeComment(body, commentId);
+        await LikeAndDislikeComment(body, commentId, setErrorMessageComment);
         setIsUpdate(!isUpdate);
+        setIdCommentMessageError(commentId);
+        setTimeout(() => {
+            setErrorMessageComment('');
+            setIdCommentMessageError('');
+        }, 3000);
     };
 
     const handleDislike = async (commentId) => {
         const body = { like: false };
-        await LikeAndDislikeComment(body, commentId);
+        await LikeAndDislikeComment(body, commentId, setErrorMessageComment);
         setIsUpdate(!isUpdate);
+        setIdCommentMessageError(commentId);
+        setTimeout(() => {
+            setErrorMessageComment('');
+            setIdCommentMessageError('');
+        }, 3000);
     };
 
     return (
         <div>
             <p>Comments Page</p>
-            {/* {posts && console.log(posts)} */}
+
+            {errorMessage && <p>{errorMessage}</p>}
+
             <form onSubmit={handleSubmit}>
                 <textarea
                     placeholder="Escreva seu comentário"
@@ -234,7 +209,7 @@ export const CommentsPage = () => {
                                             }}
                                         >
                                             <textarea
-                                                value={editingContent} // Usar o valor de edição
+                                                value={editingContent}
                                                 onChange={(event) =>
                                                     setEditingContent(
                                                         event.target.value
@@ -262,6 +237,11 @@ export const CommentsPage = () => {
                                 >
                                     Dislike
                                 </button>
+                                {comment.isCurrentUserComment &&
+                                    idCommentMessageError === comment.id &&
+                                    errorMessageComment && (
+                                        <p>{errorMessageComment}</p>
+                                    )}
                                 <hr />
                             </div>
                         ))}{' '}

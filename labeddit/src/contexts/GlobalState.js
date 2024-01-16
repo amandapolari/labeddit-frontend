@@ -6,6 +6,8 @@ const GlobalState = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessagePost, setErrorMessagePost] = useState('');
+    const [errorMessageComment, setErrorMessageComment] = useState('');
 
     // const filteredPosts = async (text) => {
     //     const postsFiltered = posts.map((post) => {
@@ -22,6 +24,10 @@ const GlobalState = ({ children }) => {
         setIsUpdate,
         errorMessage,
         setErrorMessage,
+        errorMessagePost,
+        setErrorMessagePost,
+        errorMessageComment,
+        setErrorMessageComment,
     };
 
     return (

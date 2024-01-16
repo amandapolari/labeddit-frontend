@@ -1,17 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 
 export const SignupPage = () => {
     const context = useContext(GlobalContext);
     const { errorMessage, setErrorMessage } = context;
-
-    // console.log('errorMessage:', errorMessage);
-
     const navigator = useNavigate();
 
     const [form, setForm, onChange, resetForm] = useForm({
@@ -19,6 +17,10 @@ export const SignupPage = () => {
         email: '',
         password: '',
     });
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [form]);
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -43,9 +45,6 @@ export const SignupPage = () => {
                 email: form.email,
                 password: form.password,
             };
-
-            // console.log('body:', body);
-
             const response = await Signup(body, setErrorMessage);
 
             if (response.message && response.token) {
@@ -54,30 +53,7 @@ export const SignupPage = () => {
                     goToFeedPage(navigator);
                 })();
             }
-
-            // response.message &&
-            //     console.log(
-            //         'Mensagem de resposta do signup:',
-            //         response.message
-            //     );
-
-            // response.token &&
-            //     (() => {
-            //         console.log('Token de resposta do signup:', response.token);
-            //         localStorage.setItem('token', response.token);
-            //         goToFeedPage(navigator);
-            //     })();
-        } catch (error) {
-            // console.log('Resposta de erro:', error);
-            //     console.log('Resposta de erro:', error);
-            //     error.response &&
-            //         console.log('Dados de resposta de erro:', error.response.data);
-            //     error.response?.data?.[0]?.message &&
-            //         console.log(
-            //             'Mensagem de erro:',
-            //             error.response.data[0].message
-            //         );
-        }
+        } catch (error) {}
     };
 
     return (
@@ -85,9 +61,8 @@ export const SignupPage = () => {
             <p>SignupPage</p>
 
             <br />
-            <br />
 
-            {errorMessage && errorMessage}
+            {errorMessage && <p>{errorMessage}</p>}
 
             <button
                 type="button"
@@ -132,7 +107,7 @@ export const SignupPage = () => {
 
                 <div>
                     <label>
-                        Checkbox Label:
+                        Concordo com os termos de uso
                         <input
                             type="checkbox"
                             checked={isChecked}
