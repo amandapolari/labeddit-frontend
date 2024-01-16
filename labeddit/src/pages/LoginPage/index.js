@@ -112,7 +112,8 @@ export const LoginPage = () => {
                 <p>amanda@gmail.com</p>
                 <p>Amanda@123</p>
                 <button
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.preventDefault();
                         setForm({
                             email: 'amanda@gmail.com',
                             password: 'Amanda@123',
