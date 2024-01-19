@@ -3,6 +3,7 @@ export * from './PostCard';
 export * from './CommentCard';
 export * from './Loading';
 export * from './Error';
+export * from './ThemeSelector';
 
 // export * from './CreatePost';
 // export * from './CreateComment';

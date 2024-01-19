@@ -8,12 +8,20 @@ const GlobalState = ({ children }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [errorMessagePost, setErrorMessagePost] = useState('');
     const [errorMessageComment, setErrorMessageComment] = useState('');
+    const [darkMode, setDarkMode] = useState(false);
 
     // const filteredPosts = async (text) => {
     //     const postsFiltered = posts.map((post) => {
     //         return post.content.includes(text);
     //     });
     // };
+
+    // mudança de tema:
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        setIsUpdate(!isUpdate);
+    };
+    //
 
     const datas = {
         dataReceivedFromApi,
@@ -28,6 +36,9 @@ const GlobalState = ({ children }) => {
         setErrorMessagePost,
         errorMessageComment,
         setErrorMessageComment,
+        darkMode,
+        setDarkMode,
+        toggleDarkMode,
     };
 
     return (

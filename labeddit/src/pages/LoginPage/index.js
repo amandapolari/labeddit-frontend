@@ -6,11 +6,15 @@ import { goToFeedPage, goToSignupPage } from '../../routes/coordinator';
 import { Login } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../../contexts/GlobalContext';
+import images from '../../assets/importImages';
+import { Container } from '@mui/material';
+import { ThemeSelector } from '../../components';
+import { ContainerPageLogin } from './syled';
 
 export const LoginPage = () => {
     const navigator = useNavigate();
     const context = useContext(GlobalContext);
-    const { errorMessage, setErrorMessage } = context;
+    const { errorMessage, setErrorMessage, darkMode } = context;
 
     const [form, setForm, onChange, resetForm] = useForm({
         email: '',
@@ -40,8 +44,14 @@ export const LoginPage = () => {
     };
 
     return (
-        <div>
-            <h1>LoginPage</h1>
+        <ContainerPageLogin darkMode={darkMode}>
+            {/* <h1>LoginPage</h1> */}
+            {/* {console.log(darkMode)} */}
+            <ThemeSelector />
+            <Container maxWidth="sm">
+                <img alt="logo da labeddit" src={images.logo_and_title} />
+                <p>O projeto de rede social da Labenu</p>
+            </Container>
 
             {errorMessage && <p>{errorMessage}</p>}
 
@@ -100,6 +110,6 @@ export const LoginPage = () => {
                     Cadastrar
                 </button>
             </form>
-        </div>
+        </ContainerPageLogin>
     );
 };

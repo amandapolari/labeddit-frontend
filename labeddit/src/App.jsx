@@ -1,12 +1,19 @@
 import { Router } from './routes';
-import GlobalState from './contexts/GlobalState';
+import { useContext } from 'react';
+import { ThemeProvider } from '@mui/material';
+// import { ThemeProvider } from '@mui/material/styles';
+
+import { darkTheme, lightTheme } from './styles/theme';
+import GlobalContext from './contexts/GlobalContext';
 
 const App = () => {
+    const context = useContext(GlobalContext);
+    const { darkMode } = context;
+
     return (
-        <GlobalState>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <Router />
-            {/* <p>Projeto funcionando!</p> */}
-        </GlobalState>
+        </ThemeProvider>
     );
 };
 
