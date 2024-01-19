@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Header } from '../components';
-import { PATH } from '../constants/constants';
 
 import {
     LoginPage,
@@ -13,8 +11,6 @@ import {
 export const Router = () => {
     return (
         <BrowserRouter>
-            {/* <Header /> */}
-            {PATH !== '/' ? <Header /> : ''}
             <Routes>
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
