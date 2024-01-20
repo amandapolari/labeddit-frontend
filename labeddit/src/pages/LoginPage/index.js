@@ -71,7 +71,7 @@ export const LoginPage = () => {
 
     return (
         <ContainerPageLogin darkMode={darkMode}>
-            <ThemeSelector />
+            {/* <ThemeSelector /> */}
             <ContainerLogoAndTitle>
                 <ImageLogo alt='logo da labeddit' src={images.logo_and_title} />
                 <SubtitleLogin>
