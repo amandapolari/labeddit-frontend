@@ -1,12 +1,24 @@
-import { ButtonLogin, HeaderStyled } from './syled';
-// import images from '../../assets/importImages';
+import {
+    ButtonLogin,
+    ButtonLogout,
+    ContainerHeaderComponent,
+    ImageClose,
+} from './syled';
+import images from '../../assets/importImages';
 
-export const Header = () => {
+export const Header = ({
+    isCommentPage,
+    isSignupPage,
+    isFeedOrCommentsPage,
+}) => {
     return (
-        <HeaderStyled>
-            {/* <ButtonLogin variant="header">Labeddit</ButtonLogin> */}
-            {/* <img alt="logo da labeddit" src={images.logo} /> */}
-            <ButtonLogin variant="header">Login</ButtonLogin>
-        </HeaderStyled>
+        <ContainerHeaderComponent>
+            <ImageClose isCommentPage={isCommentPage} src={images.close_icon} />
+            <img alt='logo da labeddit' src={images.logo} />
+            <ButtonLogin isSignupPage={isSignupPage}>Entrar</ButtonLogin>
+            <ButtonLogout isFeedOrCommentsPage={isFeedOrCommentsPage}>
+                Logout
+            </ButtonLogout>
+        </ContainerHeaderComponent>
     );
 };

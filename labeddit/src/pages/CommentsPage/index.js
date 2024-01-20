@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProtectPage } from '../../hooks/useProtectPage';
@@ -12,9 +13,12 @@ import {
     LikeAndDislikeComment,
 } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
-import { Error, Loading } from '../../components';
+import { Error, Header, Loading } from '../../components';
 
 export const CommentsPage = () => {
+    const [form, setForm, onChange, resetForm] = useForm({
+        content: '',
+    });
     const navigator = useNavigate();
     useProtectPage(navigator);
 
@@ -34,11 +38,43 @@ export const CommentsPage = () => {
         setErrorMessage,
         errorMessageComment,
         setErrorMessageComment,
+        isCommentPage,
+        setIsCommentPage,
+        isSignupPage,
+        setIsSignupPage,
+        isFeedOrCommentsPage,
+        setIsFeedOrCommentsPage,
     } = context;
 
-    const [form, onChange, resetForm] = useForm({
-        content: '',
-    });
+    const path = window.location.pathname;
+    // console.log('path', path);
+
+    // if (path.includes('comments')) {
+    //     // setIsCommentPage(true);
+    //     console.log('estou em comentários');
+    // }
+
+    useEffect(() => {
+        if (path.includes('comments')) {
+            setIsCommentPage(true);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('signup')) {
+            setIsSignupPage(true);
+        } else {
+            setIsSignupPage(false);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('feed') || path.includes('comments')) {
+            setIsFeedOrCommentsPage(true);
+        } else {
+            setIsFeedOrCommentsPage(false);
+        }
+    }, [isUpdate]);
 
     const [editingContent, setEditingContent] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -140,19 +176,24 @@ export const CommentsPage = () => {
 
     return (
         <div>
+            <Header
+                isCommentPage={isCommentPage}
+                isSignupPage={isSignupPage}
+                isFeedOrCommentsPage={isFeedOrCommentsPage}
+            />
             <p>Comments Page</p>
 
             {errorMessage && <p>{errorMessage}</p>}
 
             <form onSubmit={handleSubmit}>
                 <textarea
-                    placeholder="Escreva seu comentário"
+                    placeholder='Escreva seu comentário'
                     value={form.content}
                     onChange={onChange}
-                    name="content"
+                    name='content'
                 />
                 <br />
-                <button type="submit">Responder</button>
+                <button type='submit'>Responder</button>
             </form>
             {isLoading ? (
                 <Loading />
@@ -215,10 +256,10 @@ export const CommentsPage = () => {
                                                         event.target.value
                                                     )
                                                 }
-                                                name="content"
+                                                name='content'
                                             />
                                             <br />
-                                            <button type="submit">
+                                            <button type='submit'>
                                                 Salvar
                                             </button>
                                         </form>

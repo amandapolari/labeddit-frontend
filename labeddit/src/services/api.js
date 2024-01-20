@@ -50,8 +50,10 @@ export const CreatePost = async (body, setErrorMessage) => {
                 Authorization: localStorage.getItem('token'),
             },
         });
+        // console.log('Resposta do post:', data);
         return data;
     } catch (error) {
+        // console.log('Resposta de erro:', error);
         handleRequestError(error, setErrorMessage);
     }
 };

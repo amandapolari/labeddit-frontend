@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
+import { darkTheme, lightTheme } from '../../styles/index';
 
 export const ContainerThemeSelector = styled(Box)`
     display: flex;
@@ -18,5 +20,8 @@ export const ContainerThemeSelector = styled(Box)`
 `;
 
 export const ContainerIconButton = styled.div`
-    color: ${({ darkMode }) => (darkMode ? 'red' : 'blue')};
+    color: ${({ darkMode }) =>
+        darkMode
+            ? darkTheme.palette.gray.one
+            : darkTheme.backgrounds.bg_page_gray_one};
 `;

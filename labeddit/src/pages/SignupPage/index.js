@@ -1,15 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
+import { Header, ThemeSelector } from '../../components';
+import { ContainerPageSignup } from './syled';
 
 export const SignupPage = () => {
     const context = useContext(GlobalContext);
-    const { errorMessage, setErrorMessage } = context;
+    const {
+        errorMessage,
+        setErrorMessage,
+        isCommentPage,
+        setIsCommentPage,
+        isUpdate,
+        setIsUpdate,
+        isSignupPage,
+        setIsSignupPage,
+        isFeedOrCommentsPage,
+        setIsFeedOrCommentsPage,
+    } = context;
     const navigator = useNavigate();
 
     const [form, setForm, onChange, resetForm] = useForm({
@@ -21,6 +34,32 @@ export const SignupPage = () => {
     useEffect(() => {
         setErrorMessage('');
     }, [form]);
+
+    const path = window.location.pathname;
+
+    useEffect(() => {
+        if (path.includes('comments')) {
+            setIsCommentPage(true);
+        } else {
+            setIsCommentPage(false);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('signup')) {
+            setIsSignupPage(true);
+        } else {
+            setIsSignupPage(false);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('feed') || path.includes('comments')) {
+            setIsFeedOrCommentsPage(true);
+        } else {
+            setIsFeedOrCommentsPage(false);
+        }
+    }, [isUpdate]);
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -57,7 +96,14 @@ export const SignupPage = () => {
     };
 
     return (
-        <div>
+        <ContainerPageSignup>
+            <Header
+                isCommentPage={isCommentPage}
+                isSignupPage={isSignupPage}
+                isFeedOrCommentsPage={isFeedOrCommentsPage}
+            />
+            <ThemeSelector />
+
             <p>SignupPage</p>
 
             <br />
@@ -65,7 +111,7 @@ export const SignupPage = () => {
             {errorMessage && <p>{errorMessage}</p>}
 
             <button
-                type="button"
+                type='button'
                 onClick={() => {
                     goToLoginPage(navigator);
                 }}
@@ -78,8 +124,8 @@ export const SignupPage = () => {
             <form onSubmit={handleSubmit}>
                 <label>Apelido</label>
                 <input
-                    type="text"
-                    name="nickname"
+                    type='text'
+                    name='nickname'
                     value={form.nickname}
                     onChange={onChange}
                 />
@@ -88,8 +134,8 @@ export const SignupPage = () => {
 
                 <label>E-mail</label>
                 <input
-                    type="text"
-                    name="email"
+                    type='text'
+                    name='email'
                     value={form.email}
                     onChange={onChange}
                 />
@@ -97,8 +143,8 @@ export const SignupPage = () => {
                 <br />
                 <label>Senha</label>
                 <input
-                    type="text"
-                    name="password"
+                    type='text'
+                    name='password'
                     value={form.password}
                     onChange={onChange}
                 />
@@ -109,7 +155,7 @@ export const SignupPage = () => {
                     <label>
                         Concordo com os termos de uso
                         <input
-                            type="checkbox"
+                            type='checkbox'
                             checked={isChecked}
                             onChange={handleCheckboxChange}
                         />
@@ -120,10 +166,10 @@ export const SignupPage = () => {
                 <br />
                 <button type={'submit'}>Cadastrar</button>
                 <br />
-                <button type="button" onClick={resetForm}>
+                <button type='button' onClick={resetForm}>
                     Resetar Formulário
                 </button>
             </form>
-        </div>
+        </ContainerPageSignup>
     );
 };

@@ -13,7 +13,7 @@ import {
     LikeAndDislikePost,
 } from '../../services/api';
 import GlobalContext from '../../contexts/GlobalContext';
-import { Error, Loading } from '../../components';
+import { Error, Header, Loading } from '../../components';
 import { goToCommentsPage } from '../../routes/coordinator';
 
 export const FeedPage = () => {
@@ -32,15 +32,47 @@ export const FeedPage = () => {
         setErrorMessage,
         errorMessagePost,
         setErrorMessagePost,
+        isCommentPage,
+        setIsCommentPage,
+        isSignupPage,
+        setIsSignupPage,
+        isFeedOrCommentsPage,
+        setIsFeedOrCommentsPage,
     } = context;
 
-    const [form, onChange, resetForm] = useForm({
+    const [form, setForm, onChange, resetForm] = useForm({
         content: '',
     });
 
     useEffect(() => {
         setErrorMessage('');
     }, [form]);
+
+    const path = window.location.pathname;
+
+    useEffect(() => {
+        if (path.includes('comments')) {
+            setIsCommentPage(true);
+        } else {
+            setIsCommentPage(false);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('signup')) {
+            setIsSignupPage(true);
+        } else {
+            setIsSignupPage(false);
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        if (path.includes('feed') || path.includes('comments')) {
+            setIsFeedOrCommentsPage(true);
+        } else {
+            setIsFeedOrCommentsPage(false);
+        }
+    }, [isUpdate]);
 
     const [editingContent, setEditingContent] = useState('');
 
@@ -152,6 +184,11 @@ export const FeedPage = () => {
 
     return (
         <div>
+            <Header
+                isCommentPage={isCommentPage}
+                isSignupPage={isSignupPage}
+                isFeedOrCommentsPage={isFeedOrCommentsPage}
+            />
             <button
                 onClick={(event) => {
                     event.preventDefault();
@@ -167,13 +204,13 @@ export const FeedPage = () => {
 
             <form onSubmit={handleSubmit}>
                 <textarea
-                    placeholder="Escreva seu post"
+                    placeholder='Escreva seu post'
                     value={form.content}
                     onChange={onChange}
-                    name="content"
+                    name='content'
                 />
                 <br />
-                <button type="submit">Postar</button>
+                <button type='submit'>Postar</button>
             </form>
             {isLoading ? (
                 <Loading />
@@ -185,7 +222,6 @@ export const FeedPage = () => {
                     return (
                         <div key={post.id}>
                             <hr />
-                            {/* {console.log(post)} */}
                             <p>
                                 CRIADOR DO POST:
                                 {post && post.creator && post.creator.nickname}
@@ -231,10 +267,10 @@ export const FeedPage = () => {
                                                     event.target.value
                                                 )
                                             }
-                                            name="content"
+                                            name='content'
                                         />
                                         <br />
-                                        <button type="submit">Salvar</button>
+                                        <button type='submit'>Salvar</button>
                                     </form>
                                 </div>
                             ) : (

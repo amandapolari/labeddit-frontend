@@ -9,19 +9,14 @@ const GlobalState = ({ children }) => {
     const [errorMessagePost, setErrorMessagePost] = useState('');
     const [errorMessageComment, setErrorMessageComment] = useState('');
     const [darkMode, setDarkMode] = useState(false);
+    const [isCommentPage, setIsCommentPage] = useState(false);
+    const [isSignupPage, setIsSignupPage] = useState(false);
+    const [isFeedOrCommentsPage, setIsFeedOrCommentsPage] = useState(false);
 
-    // const filteredPosts = async (text) => {
-    //     const postsFiltered = posts.map((post) => {
-    //         return post.content.includes(text);
-    //     });
-    // };
-
-    // mudança de tema:
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
         setIsUpdate(!isUpdate);
     };
-    //
 
     const datas = {
         dataReceivedFromApi,
@@ -39,6 +34,12 @@ const GlobalState = ({ children }) => {
         darkMode,
         setDarkMode,
         toggleDarkMode,
+        isCommentPage,
+        setIsCommentPage,
+        isSignupPage,
+        setIsSignupPage,
+        isFeedOrCommentsPage,
+        setIsFeedOrCommentsPage,
     };
 
     return (
