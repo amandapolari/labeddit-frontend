@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { defaultTheme } from '../../styles';
+import { theme } from '../../styles';
 
 export const ContainerHeaderComponent = styled.div`
     border: 2px solid red;
-    background-color: ${defaultTheme.backgrounds.bg_page_white};
+    background-color: ${theme.backgrounds.bg_page_white};
     height: 6vh;
     width: 100vw;
     /* display: flex;

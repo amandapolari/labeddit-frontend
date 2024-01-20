@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { darkTheme, lightTheme, defaultTheme } from '../../styles/index';
-
-// console.log(darkTheme);
+import { theme } from '../../styles/index';
 
 /* RESPONSIVIDADE:
 
@@ -25,10 +23,7 @@ import { darkTheme, lightTheme, defaultTheme } from '../../styles/index';
 export const ContainerPageLogin = styled.div`
     padding: 1.5rem;
     border: 2px solid red;
-    background: ${({ darkMode }) =>
-        darkMode
-            ? darkTheme.backgrounds.bg_page_gray_one
-            : lightTheme.palette.white.one};
+    background: ${theme.palette.white.one};
     height: 94.5vh;
     display: flex;
     flex-direction: column;
@@ -52,9 +47,8 @@ export const SubtitleLogin = styled.h2`
     font-family: 'IBM Plex Sans';
     font-weight: 400;
     font-size: 0.8rem;
-    color: ${({ darkMode }) =>
-        darkMode ? darkTheme.palette.black.one : lightTheme.palette.black.two};
 
+    color: ${theme.palette.black.one};
     @media (min-width: 769px) {
         font-size: 1rem;
     }
@@ -116,12 +110,12 @@ export const ContainerForms = styled.div`
 
 export const ButtonLoginPage = styled.button`
     margin-top: 4rem;
-    background: ${defaultTheme.backgrounds.bg_btn_login};
+    background: ${theme.backgrounds.bg_btn_login};
     width: 80vw;
     border: none;
     border-radius: 2.5rem;
     height: 2.9rem;
-    color: ${lightTheme.palette.white.one};
+    color: ${theme.palette.white.one};
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
@@ -129,9 +123,9 @@ export const ButtonLoginPage = styled.button`
 
 export const ButtonCreateAccount = styled.button`
     /* margin-top: 1rem; */
-    border: 1px solid ${defaultTheme.palette.orange};
-    color: ${defaultTheme.palette.orange};
-    background: ${defaultTheme.palette.white.one};
+    border: 1px solid ${theme.palette.orange};
+    color: ${theme.palette.orange};
+    background: ${theme.palette.white.one};
     width: 80vw;
     border-radius: 2.5rem;
     height: 2.9rem;
@@ -142,6 +136,6 @@ export const ButtonCreateAccount = styled.button`
 
 export const Hr = styled.hr`
     /* width: 80vw; */
-    border: 1px solid ${defaultTheme.palette.orange};
+    border: 1px solid ${theme.palette.orange};
     margin: 1rem 1rem;
 `;

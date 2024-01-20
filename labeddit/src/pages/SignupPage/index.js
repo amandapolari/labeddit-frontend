@@ -102,7 +102,6 @@ export const SignupPage = () => {
                 isSignupPage={isSignupPage}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
-            {/* <ThemeSelector /> */}
 
             <p>SignupPage</p>
 

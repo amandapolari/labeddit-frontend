@@ -1,7 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-const lightTheme = createTheme({
-    mode: 'light',
+export const theme = createTheme({
     palette: {
         black: {
             one: '#000000', // subtitulo login | e cores em preto de contrato de usuario em signup
@@ -20,64 +19,11 @@ const lightTheme = createTheme({
         orange: '#FE7E02', // color btn criar conta
         blue: '#4088CB', // color btn login in page signup e cores em azul de contrato de usuario em signup
     },
-});
-
-const darkTheme = createTheme({
-    mode: 'dark',
-    palette: {
-        black: {
-            one: '#000000', // subtitulo login | e cores em preto de contrato de usuario em signup
-            two: '#323941', // Substitua por uma cor adequada para o modo escuro
-        },
-        gray: {
-            one: '#EDEDED', // Substitua por uma cor adequada para o modo escuro
-            two: '#A8BBC6', // Substitua por uma cor adequada para o modo escuro
-            three: '#6F6F6F',
-            four: '#323941',
-            five: '#373737',
-        },
-        white: {
-            one: '#FFFFFF', // Substitua por uma cor adequada para o modo escuro
-        },
-        orange: '#FE7E02',
-        blue: '#4088CB',
-    },
-    backgrounds: {
-        bg_btn_gradiente_orange:
-            'linear-gradient(90deg, #FF6489 0%, #F9B24E 100%)',
-        bg_page_white: '#171717', // Substitua por uma cor adequada para o modo escuro
-        bg_page_gray: '#CADAE3', // bg do login
-        bg_page_gray_one: '#808A9A', // bg do login
-    },
-});
-
-const defaultTheme = createTheme({
-    palette: {
-        black: {
-            one: '#000000', // subtitulo login | e cores em preto de contrato de usuario em signup
-            two: '#323941', // Substitua por uma cor adequada para o modo escuro
-        },
-        gray: {
-            one: '#EDEDED', // Substitua por uma cor adequada para o modo escuro
-            two: '#A8BBC6', // Substitua por uma cor adequada para o modo escuro
-            three: '#6F6F6F',
-            four: '#323941',
-            five: '#373737',
-        },
-        white: {
-            one: '#FFFFFF', // Substitua por uma cor adequada para o modo escuro
-        },
-        orange: '#FE7E02',
-        blue: '#4088CB',
-    },
     backgrounds: {
         bg_btn_login: 'linear-gradient(90deg, #FF6489 0%, #F9B24E 100%)',
         bg_page_white: '#E5E5E5', // bg do login
-        // bg_page_gray: '#EDEDED', // bg do login
     },
 });
-
-export { lightTheme, darkTheme, defaultTheme };
 
 /*
 Tons de cinza para utilizar do mais escuro pro mais claro:

@@ -8,15 +8,9 @@ const GlobalState = ({ children }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [errorMessagePost, setErrorMessagePost] = useState('');
     const [errorMessageComment, setErrorMessageComment] = useState('');
-    const [darkMode, setDarkMode] = useState(false);
     const [isCommentPage, setIsCommentPage] = useState(false);
     const [isSignupPage, setIsSignupPage] = useState(false);
     const [isFeedOrCommentsPage, setIsFeedOrCommentsPage] = useState(false);
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        setIsUpdate(!isUpdate);
-    };
 
     const datas = {
         dataReceivedFromApi,
@@ -31,9 +25,6 @@ const GlobalState = ({ children }) => {
         setErrorMessagePost,
         errorMessageComment,
         setErrorMessageComment,
-        darkMode,
-        setDarkMode,
-        toggleDarkMode,
         isCommentPage,
         setIsCommentPage,
         isSignupPage,

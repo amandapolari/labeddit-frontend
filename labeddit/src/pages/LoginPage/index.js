@@ -15,7 +15,6 @@ import {
     InputLabel,
     OutlinedInput,
 } from '@mui/material';
-import { ThemeSelector } from '../../components';
 import {
     ButtonCreateAccount,
     ButtonLoginPage,
@@ -33,7 +32,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export const LoginPage = () => {
     const navigator = useNavigate();
     const context = useContext(GlobalContext);
-    const { errorMessage, setErrorMessage, darkMode } = context;
+    const { errorMessage, setErrorMessage } = context;
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -70,8 +69,7 @@ export const LoginPage = () => {
     };
 
     return (
-        <ContainerPageLogin darkMode={darkMode}>
-            {/* <ThemeSelector /> */}
+        <ContainerPageLogin>
             <ContainerLogoAndTitle>
                 <ImageLogo alt='logo da labeddit' src={images.logo_and_title} />
                 <SubtitleLogin>
@@ -91,14 +89,7 @@ export const LoginPage = () => {
                     /> */}
 
                         {/* ---------------- */}
-                        <InputLabel
-                            htmlFor='outlined-adornment-email'
-                            // sx={
-                            //     darkMode
-                            //         ? { backgroundColor: 'black' }
-                            //         : { backgroundColor: 'white' }
-                            // }
-                        >
+                        <InputLabel htmlFor='outlined-adornment-email'>
                             E-mail
                         </InputLabel>
                         <OutlinedInput
