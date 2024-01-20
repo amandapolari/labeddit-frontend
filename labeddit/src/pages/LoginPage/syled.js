@@ -22,7 +22,6 @@ import { theme } from '../../styles/index';
 
 export const ContainerPageLogin = styled.div`
     padding: 1.5rem;
-    border: 2px solid red;
     background: ${theme.palette.white.one};
     height: 94.5vh;
     display: flex;

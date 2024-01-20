@@ -101,7 +101,7 @@ export const LoginPage = () => {
                             endAdornment={
                                 <InputAdornment position='end'></InputAdornment>
                             }
-                            label='email'
+                            label='E-mail'
                         />
                     </FormControl>
                     <FormControl
@@ -116,7 +116,7 @@ export const LoginPage = () => {
                     onChange={onChange}
                     /> */}
                         <InputLabel htmlFor='outlined-adornment-password'>
-                            Password
+                            Senha
                         </InputLabel>
                         <OutlinedInput
                             id='outlined-adornment-password'
@@ -140,7 +140,7 @@ export const LoginPage = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label='Password'
+                            label='Senha'
                         />
                     </FormControl>
 
