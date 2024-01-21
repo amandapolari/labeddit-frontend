@@ -6,7 +6,7 @@ import {
     ImageLogo,
 } from './syled';
 import images from '../../assets/importImages';
-import { goToLoginPage } from '../../routes/coordinator';
+import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
 import { useNavigate } from 'react-router-dom';
 import { Logout } from '../../constants/constants';
 
@@ -18,7 +18,14 @@ export const Header = ({
     const navigator = useNavigate();
     return (
         <ContainerHeaderComponent>
-            <ImageClose isCommentPage={isCommentPage} src={images.close_icon} />
+            <ImageClose
+                isCommentPage={isCommentPage}
+                src={images.close_icon}
+                onClick={(event) => {
+                    event.preventDefault();
+                    goToFeedPage(navigator);
+                }}
+            />
             <ImageLogo alt='logo da labeddit' src={images.logo} />
             <ButtonLogin
                 onClick={(event) => {
@@ -41,14 +48,3 @@ export const Header = ({
         </ContainerHeaderComponent>
     );
 };
-
-/*
-            <button
-                onClick={(event) => {
-                    event.preventDefault();
-                    Logout(navigator);
-                }}
-            >
-                Sair
-            </button>
-*/

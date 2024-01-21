@@ -13,7 +13,7 @@ import {
     LikeAndDislikeComment,
 } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
-import { Error, Header, Loading } from '../../components';
+import { Card, Error, Header, Loading } from '../../components';
 
 export const CommentsPage = () => {
     const [form, setForm, onChange, resetForm] = useForm({
@@ -36,8 +36,6 @@ export const CommentsPage = () => {
         setIsUpdate,
         errorMessage,
         setErrorMessage,
-        errorMessageComment,
-        setErrorMessageComment,
         isCommentPage,
         setIsCommentPage,
         isSignupPage,
@@ -47,12 +45,6 @@ export const CommentsPage = () => {
     } = context;
 
     const path = window.location.pathname;
-    // console.log('path', path);
-
-    // if (path.includes('comments')) {
-    //     // setIsCommentPage(true);
-    //     console.log('estou em comentários');
-    // }
 
     useEffect(() => {
         if (path.includes('comments')) {
@@ -76,10 +68,6 @@ export const CommentsPage = () => {
         }
     }, [isUpdate]);
 
-    const [editingContent, setEditingContent] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
-    const [idCommentToEdit, setIdCommentToEdit] = useState('');
-    const [idCommentMessageError, setIdCommentMessageError] = useState('');
     const [data, isLoading, isError] = useRequestData(urlComments, isUpdate);
 
     useEffect(() => {
@@ -104,8 +92,7 @@ export const CommentsPage = () => {
         setErrorMessage('');
     }, [form]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         try {
             const body = {
                 content: form.content,
@@ -114,64 +101,6 @@ export const CommentsPage = () => {
             response && resetForm();
             setIsUpdate(!isUpdate);
         } catch (error) {}
-    };
-
-    const handleDeleteComment = async (id) => {
-        try {
-            const response = await DeleteComment(id);
-
-            setIsUpdate(!isUpdate);
-
-            console.log('Resposta do post:', response);
-        } catch (error) {}
-    };
-
-    const handleEditButtonClick = (commentId) => {
-        const commentToEdit = posts.comments.find(
-            (comment) => comment.id === commentId
-        );
-        setIsEditing(true);
-        setIdCommentToEdit(commentId);
-        setEditingContent(commentToEdit.content);
-    };
-
-    const handleEdit = async (commentId) => {
-        try {
-            const body = {
-                content: editingContent,
-            };
-
-            await EditComment(body, commentId);
-
-            setIsEditing(false);
-            setIdCommentToEdit('');
-            setIsUpdate(!isUpdate);
-            setEditingContent('');
-        } catch (error) {
-            console.log('Erro ao salvar a edição:', error);
-        }
-    };
-
-    const handleLike = async (commentId) => {
-        const body = { like: true };
-        await LikeAndDislikeComment(body, commentId, setErrorMessageComment);
-        setIsUpdate(!isUpdate);
-        setIdCommentMessageError(commentId);
-        setTimeout(() => {
-            setErrorMessageComment('');
-            setIdCommentMessageError('');
-        }, 3000);
-    };
-
-    const handleDislike = async (commentId) => {
-        const body = { like: false };
-        await LikeAndDislikeComment(body, commentId, setErrorMessageComment);
-        setIsUpdate(!isUpdate);
-        setIdCommentMessageError(commentId);
-        setTimeout(() => {
-            setErrorMessageComment('');
-            setIdCommentMessageError('');
-        }, 3000);
     };
 
     return (
@@ -185,7 +114,12 @@ export const CommentsPage = () => {
 
             {errorMessage && <p>{errorMessage}</p>}
 
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    handleSubmit();
+                }}
+            >
                 <textarea
                     placeholder='Escreva seu comentário'
                     value={form.content}
@@ -213,77 +147,18 @@ export const CommentsPage = () => {
                     {posts.comments &&
                         posts.comments.map((comment) => (
                             <div key={comment.id}>
-                                <hr />
-                                <p>{comment && comment.creator.nickname}</p>
-                                {idCommentToEdit === comment.id && isEditing
-                                    ? ''
-                                    : comment.content}
-                                {comment.isCurrentUserPost ? (
-                                    <button
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            handleDeleteComment(comment.id);
-                                        }}
-                                    >
-                                        Excluir
-                                    </button>
-                                ) : (
-                                    ''
-                                )}
-
-                                {comment.isCurrentUserPost && (
-                                    <button
-                                        onClick={() =>
-                                            handleEditButtonClick(comment.id)
-                                        }
-                                    >
-                                        Editar
-                                    </button>
-                                )}
-
-                                {idCommentToEdit === comment.id && isEditing ? (
-                                    <div>
-                                        <form
-                                            onSubmit={(event) => {
-                                                event.preventDefault();
-                                                handleEdit(comment.id);
-                                            }}
-                                        >
-                                            <textarea
-                                                value={editingContent}
-                                                onChange={(event) =>
-                                                    setEditingContent(
-                                                        event.target.value
-                                                    )
-                                                }
-                                                name='content'
-                                            />
-                                            <br />
-                                            <button type='submit'>
-                                                Salvar
-                                            </button>
-                                        </form>
-                                    </div>
-                                ) : (
-                                    ''
-                                )}
-
-                                <p>LIKE: {comment.likesCount}</p>
-                                <p>DISLIKE: {comment.dislikesCount}</p>
-                                <button onClick={() => handleLike(comment.id)}>
-                                    Like
-                                </button>
-                                <button
-                                    onClick={() => handleDislike(comment.id)}
-                                >
-                                    Dislike
-                                </button>
-                                {comment.isCurrentUserComment &&
-                                    idCommentMessageError === comment.id &&
-                                    errorMessageComment && (
-                                        <p>{errorMessageComment}</p>
-                                    )}
-                                <hr />
+                                <Card
+                                    creator={comment.creator.nickname}
+                                    id={comment.id}
+                                    content={comment.content}
+                                    boolenIsCurrentUser={
+                                        comment.isCurrentUserComment
+                                    }
+                                    likesCount={comment.likesCount}
+                                    dislikesCount={comment.dislikesCount}
+                                    commentsCount={comment.commentsCount}
+                                    listContent={posts}
+                                />
                             </div>
                         ))}{' '}
                 </div>
