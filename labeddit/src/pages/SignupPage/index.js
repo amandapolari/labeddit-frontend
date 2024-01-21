@@ -10,8 +10,9 @@ import { Header } from '../../components';
 import {
     BtnCreateAccount,
     ContainerCheckbox,
-    ContainerContent,
+    ContainerContentSignup,
     ContainerForms,
+    ContainerFormsSignup,
     ContainerPageSignup,
     ContainerTermsOfUse,
     InputCheckbox,
@@ -134,7 +135,7 @@ export const SignupPage = () => {
                 isSignupPage={isSignupPage}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
-            <ContainerContent>
+            <ContainerContentSignup>
                 <TextApresentation>
                     Olá, boas vindas ao LabEddit ;)
                 </TextApresentation>
@@ -145,7 +146,7 @@ export const SignupPage = () => {
                     </MessageAlertInputs>
                 )}
 
-                <ContainerForms>
+                <ContainerFormsSignup>
                     <form onSubmit={handleSubmit}>
                         <FormControl
                             sx={{ m: 0.5, width: '38vh' }}
@@ -248,8 +249,8 @@ export const SignupPage = () => {
 
                         {/* <button type='button' onClick={resetForm}>Resetar Formulário</button> */}
                     </form>
-                </ContainerForms>
-            </ContainerContent>
+                </ContainerFormsSignup>
+            </ContainerContentSignup>
         </ContainerPageSignup>
     );
 };

@@ -7,7 +7,7 @@ export const ContainerPageSignup = styled.div`
     background: ${theme.palette.white[1]};
 `;
 
-export const ContainerContent = styled.div`
+export const ContainerContentSignup = styled.div`
     /* padding: 0 1.6rem 1.6rem 1.6rem; */
     padding: 1rem;
 `;
@@ -20,7 +20,7 @@ export const TextApresentation = styled.p`
     margin-bottom: 10rem;
 `;
 
-export const ContainerForms = styled.div`
+export const ContainerFormsSignup = styled.div`
     display: flex;
     padding: 0 1.6rem 1.6rem 1.6rem;
     /* Não tenho certeza se o design pede ao centro ou a esquerda */
@@ -62,7 +62,7 @@ export const BtnCreateAccount = styled.button`
     background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
-    border-radius: 2.5rem;
+    border-radius: 12px;
     height: 2.9rem;
     color: ${theme.palette.white[1]};
     font-size: 0.9rem;

@@ -18,9 +18,11 @@ import {
 import {
     ButtonCreateAccount,
     ButtonLoginPage,
+    ContainerButtonsLogin,
     ContainerForms,
     ContainerLogoAndTitle,
     ContainerPageLogin,
+    DivisorLoginPage,
     Hr,
     ImageLogo,
     SubtitleLogin,
@@ -80,15 +82,6 @@ export const LoginPage = () => {
             <ContainerForms>
                 <form onSubmit={handleSubmit}>
                     <FormControl sx={{ width: '80vw' }} variant='outlined'>
-                        {/* <input
-                        type='text'
-                        name='email'
-                        placeholder='E-mail'
-                        value={form.email}
-                        onChange={onChange}
-                    /> */}
-
-                        {/* ---------------- */}
                         <InputLabel htmlFor='outlined-adornment-email'>
                             E-mail
                         </InputLabel>
@@ -108,13 +101,6 @@ export const LoginPage = () => {
                         sx={{ width: '80vw', marginTop: '1vh' }}
                         variant='outlined'
                     >
-                        {/* <input
-                    type='text'
-                    name='password'
-                    placeholder='Senha'
-                    value={form.password}
-                    onChange={onChange}
-                    /> */}
                         <InputLabel htmlFor='outlined-adornment-password'>
                             Senha
                         </InputLabel>
@@ -144,20 +130,21 @@ export const LoginPage = () => {
                         />
                     </FormControl>
 
-                    {/* {errorMessage && <p>{errorMessage}</p>} */}
-
                     {errorMessage && (
                         <p>
                             <Alert severity='warning'>{errorMessage}</Alert>
                         </p>
                     )}
 
-                    <ButtonLoginPage type='submit'>Continuar</ButtonLoginPage>
+                    <ContainerButtonsLogin>
+                        <ButtonLoginPage type='submit'>
+                            Continuar
+                        </ButtonLoginPage>
 
-                    {/* <button type='button' onClick={resetForm}>
+                        {/* <button type='button' onClick={resetForm}>
                     Resetar Formulário
                 </button> */}
-                    {/* 
+                        {/* 
                 <h3>Conta de teste</h3>
                 <p>amanda@gmail.com</p>
                 <p>Amanda@123</p>
@@ -173,16 +160,17 @@ export const LoginPage = () => {
                     Autopreencher
                 </button> */}
 
-                    <Hr />
+                        <DivisorLoginPage />
 
-                    <ButtonCreateAccount
-                        type='button'
-                        onClick={() => {
-                            goToSignupPage(navigator);
-                        }}
-                    >
-                        Crie uma conta!
-                    </ButtonCreateAccount>
+                        <ButtonCreateAccount
+                            type='button'
+                            onClick={() => {
+                                goToSignupPage(navigator);
+                            }}
+                        >
+                            Crie uma conta!
+                        </ButtonCreateAccount>
+                    </ContainerButtonsLogin>
                 </form>
             </ContainerForms>
         </ContainerPageLogin>

@@ -93,6 +93,13 @@ export const ContainerForms = styled.div`
     justify-content: center;
     padding: 1rem;
 
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     @media (min-width: 375px) {
     }
 
@@ -111,7 +118,7 @@ export const ButtonLoginPage = styled.button`
     background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
-    border-radius: 2.5rem;
+    border-radius: 12px;
     height: 2.9rem;
     color: ${theme.palette.white[1]};
     font-size: 0.9rem;
@@ -125,15 +132,37 @@ export const ButtonCreateAccount = styled.button`
     color: ${theme.palette.orange[1]};
     background: ${theme.palette.white[1]};
     width: 80vw;
-    border-radius: 2.5rem;
+    border-radius: 12px;
     height: 2.9rem;
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
 `;
 
-export const Hr = styled.hr`
-    /* width: 80vw; */
-    border: 1px solid ${theme.palette.orange[1]};
+export const DivisorLoginPage = styled.div`
+    height: 1px;
+    background: ${theme.backgrounds[1]};
     margin: 1rem 1rem;
+    // AJUSTAR POSICIONAMENTO:
+    width: 100%;
+`;
+
+export const ContainerButtonsLogin = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    @media (min-width: 375px) {
+    }
+
+    @media (min-width: 769px) {
+    }
+
+    @media (min-width: 1024px) {
+    }
+
+    @media (min-width: 1200px) {
+    }
 `;

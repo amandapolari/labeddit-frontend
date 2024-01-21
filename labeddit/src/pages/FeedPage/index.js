@@ -15,6 +15,17 @@ import {
 import GlobalContext from '../../contexts/GlobalContext';
 import { Error, Header, Loading } from '../../components';
 import { goToCommentsPage } from '../../routes/coordinator';
+import {
+    BtnCreatePost,
+    ContainerContentFeedpage,
+    ContainerFeedpage,
+    ContainerFormsFeedpage,
+    ContainerPageFeed,
+    Divisor,
+    DivisorFeed,
+    Hr,
+    Textarea,
+} from './syled';
 
 export const FeedPage = () => {
     const navigator = useNavigate();
@@ -183,125 +194,123 @@ export const FeedPage = () => {
     };
 
     return (
-        <div>
+        <ContainerFeedpage>
             <Header
                 isCommentPage={isCommentPage}
                 isSignupPage={isSignupPage}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
-            <button
-                onClick={(event) => {
-                    event.preventDefault();
-                    Logout(navigator);
-                }}
-            >
-                Sair
-            </button>
-            <br />
-            <p>FeedPage</p>
-
-            {errorMessage && <p>{errorMessage}</p>}
-
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    placeholder='Escreva seu post'
-                    value={form.content}
-                    onChange={onChange}
-                    name='content'
-                />
-                <br />
-                <button type='submit'>Postar</button>
-            </form>
-            {isLoading ? (
-                <Loading />
-            ) : isError ? (
-                <Error />
-            ) : (
-                posts &&
-                posts.map((post) => {
-                    return (
-                        <div key={post.id}>
-                            <hr />
-                            <p>
-                                CRIADOR DO POST:
-                                {post && post.creator && post.creator.nickname}
-                            </p>
-                            {idPostToEdit === post.id && isEditing
-                                ? ''
-                                : post.content}
-                            {post.isCurrentUserPost ? (
-                                <button
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        handleDeletePost(post.id);
-                                    }}
-                                >
-                                    Excluir
-                                </button>
-                            ) : (
-                                ''
-                            )}
-
-                            {post.isCurrentUserPost && (
-                                <button
-                                    onClick={() =>
-                                        handleEditButtonClick(post.id)
-                                    }
-                                >
-                                    Editar
-                                </button>
-                            )}
-
-                            {idPostToEdit === post.id && isEditing ? (
-                                <div>
-                                    <form
-                                        onSubmit={(event) => {
+            <ContainerContentFeedpage>
+                {errorMessage && <p>{errorMessage}</p>}
+                <ContainerFormsFeedpage>
+                    <form onSubmit={handleSubmit}>
+                        <Textarea
+                            placeholder='Escreva seu post...'
+                            value={form.content}
+                            onChange={onChange}
+                            name='content'
+                        />
+                        <br />
+                        <BtnCreatePost type='submit'>Postar</BtnCreatePost>
+                    </form>
+                    <DivisorFeed />
+                </ContainerFormsFeedpage>
+                {isLoading ? (
+                    <Loading />
+                ) : isError ? (
+                    <Error />
+                ) : (
+                    posts &&
+                    posts.map((post) => {
+                        return (
+                            <div key={post.id}>
+                                <p>
+                                    CRIADOR DO POST:
+                                    {post &&
+                                        post.creator &&
+                                        post.creator.nickname}
+                                </p>
+                                {idPostToEdit === post.id && isEditing
+                                    ? ''
+                                    : post.content}
+                                {post.isCurrentUserPost ? (
+                                    <button
+                                        onClick={(event) => {
                                             event.preventDefault();
-                                            handleEdit(post.id);
+                                            handleDeletePost(post.id);
                                         }}
                                     >
-                                        <textarea
-                                            value={editingContent}
-                                            onChange={(event) =>
-                                                setEditingContent(
-                                                    event.target.value
-                                                )
-                                            }
-                                            name='content'
-                                        />
-                                        <br />
-                                        <button type='submit'>Salvar</button>
-                                    </form>
-                                </div>
-                            ) : (
-                                ''
-                            )}
-                            <p> LIKES: {post.likesCount}</p>
-                            <p> DISLIKES: {post.dislikesCount}</p>
-                            <button onClick={() => handleLike(post.id)}>
-                                Like
-                            </button>
-                            <button onClick={() => handleDislike(post.id)}>
-                                Dislike
-                            </button>
+                                        Excluir
+                                    </button>
+                                ) : (
+                                    ''
+                                )}
 
-                            {post.isCurrentUserPost &&
-                                idPostMessageError === post.id &&
-                                errorMessagePost && <p>{errorMessagePost}</p>}
+                                {post.isCurrentUserPost && (
+                                    <button
+                                        onClick={() =>
+                                            handleEditButtonClick(post.id)
+                                        }
+                                    >
+                                        Editar
+                                    </button>
+                                )}
 
-                            <p> COMENTÁRIOS: {post.commentsCount}</p>
-                            <button
-                                onClick={() => {
-                                    goToCommentsPage(navigator, post.id);
-                                }}
-                            >
-                                Comentários
-                            </button>
-                            <hr />
-                        </div>
-                    );
-                })
-            )}
-        </div>
+                                {idPostToEdit === post.id && isEditing ? (
+                                    <div>
+                                        <form
+                                            onSubmit={(event) => {
+                                                event.preventDefault();
+                                                handleEdit(post.id);
+                                            }}
+                                        >
+                                            <textarea
+                                                value={editingContent}
+                                                onChange={(event) =>
+                                                    setEditingContent(
+                                                        event.target.value
+                                                    )
+                                                }
+                                                name='content'
+                                            />
+                                            <br />
+                                            <button type='submit'>
+                                                Salvar
+                                            </button>
+                                        </form>
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
+                                <p> LIKES: {post.likesCount}</p>
+                                <p> DISLIKES: {post.dislikesCount}</p>
+                                <button onClick={() => handleLike(post.id)}>
+                                    Like
+                                </button>
+                                <button onClick={() => handleDislike(post.id)}>
+                                    Dislike
+                                </button>
+
+                                {post.isCurrentUserPost &&
+                                    idPostMessageError === post.id &&
+                                    errorMessagePost && (
+                                        <p>{errorMessagePost}</p>
+                                    )}
+
+                                <p> COMENTÁRIOS: {post.commentsCount}</p>
+                                <button
+                                    onClick={() => {
+                                        goToCommentsPage(navigator, post.id);
+                                    }}
+                                >
+                                    Comentários
+                                </button>
+                                <hr />
+                            </div>
+                        );
+                    })
+                )}
+            </ContainerContentFeedpage>
+        </ContainerFeedpage>
     );
 };
