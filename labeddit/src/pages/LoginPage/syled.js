@@ -22,7 +22,7 @@ import { theme } from '../../styles/index';
 
 export const ContainerPageLogin = styled.div`
     padding: 1.5rem;
-    background: ${theme.palette.white.one};
+    background: ${theme.palette.white[1]};
     height: 94.5vh;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@ export const SubtitleLogin = styled.h2`
     font-weight: 400;
     font-size: 0.8rem;
 
-    color: ${theme.palette.black.one};
+    color: ${theme.palette.black[1]};
     @media (min-width: 769px) {
         font-size: 1rem;
     }
@@ -87,7 +87,6 @@ export const ImageLogo = styled.img`
 `;
 
 export const ContainerForms = styled.div`
-    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,12 +108,12 @@ export const ContainerForms = styled.div`
 
 export const ButtonLoginPage = styled.button`
     margin-top: 4rem;
-    background: ${theme.backgrounds.bg_btn_login};
+    background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
     border-radius: 2.5rem;
     height: 2.9rem;
-    color: ${theme.palette.white.one};
+    color: ${theme.palette.white[1]};
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
@@ -122,9 +121,9 @@ export const ButtonLoginPage = styled.button`
 
 export const ButtonCreateAccount = styled.button`
     /* margin-top: 1rem; */
-    border: 1px solid ${theme.palette.orange};
-    color: ${theme.palette.orange};
-    background: ${theme.palette.white.one};
+    border: 1px solid ${theme.palette.orange[1]};
+    color: ${theme.palette.orange[1]};
+    background: ${theme.palette.white[1]};
     width: 80vw;
     border-radius: 2.5rem;
     height: 2.9rem;
@@ -135,6 +134,6 @@ export const ButtonCreateAccount = styled.button`
 
 export const Hr = styled.hr`
     /* width: 80vw; */
-    border: 1px solid ${theme.palette.orange};
+    border: 1px solid ${theme.palette.orange[1]};
     margin: 1rem 1rem;
 `;

@@ -215,11 +215,11 @@ export const SignupPage = () => {
                         </FormControl>
                         <ContainerTermsOfUse>
                             Ao continuar, você concorda com o nosso{' '}
-                            <b style={{ color: theme.palette.blue }}>
+                            <b style={{ color: theme.palette.blue[1] }}>
                                 Contrato de Usuário
                             </b>{' '}
                             e nossa{' '}
-                            <b style={{ color: theme.palette.blue }}>
+                            <b style={{ color: theme.palette.blue[1] }}>
                                 Política de Privacidade .
                             </b>
                             <ContainerCheckbox>

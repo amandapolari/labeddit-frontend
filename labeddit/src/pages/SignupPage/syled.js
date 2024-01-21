@@ -4,7 +4,7 @@ import { theme } from '../../styles';
 export const ContainerPageSignup = styled.div`
     /* border: 2px solid red; */
     height: 100vh;
-    background: ${theme.palette.white.one};
+    background: ${theme.palette.white[1]};
 `;
 
 export const ContainerContent = styled.div`
@@ -59,12 +59,12 @@ export const LabelInputCheckbox = styled.label`
 export const BtnCreateAccount = styled.button`
     /* margin-top: 4rem; */
     margin-top: 1rem;
-    background: ${theme.backgrounds.bg_btn_login};
+    background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
     border-radius: 2.5rem;
     height: 2.9rem;
-    color: ${theme.palette.white.one};
+    color: ${theme.palette.white[1]};
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
