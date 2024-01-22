@@ -1,15 +1,23 @@
 /* eslint-disable no-unused-vars */
 import {
+    ContainerAlert,
     ContainerButtons,
     ContainerContentCard,
+    ContainerDeleteAndEdit,
+    ContainerGoToComments,
+    ContainerImgComments,
+    ContainerLikesAndDislikes,
+    ContainerTextContent,
+    ContentText,
     IconVectorDown,
     IconVectorUp,
     ImageComment,
+    TextAlert,
     TextCreatorContent,
 } from './syled';
 
 import images from '../../assets/importImages';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 import {
     DeleteComment,
@@ -22,6 +30,10 @@ import {
 import { useForm } from '../../hooks/useForm';
 import { goToCommentsPage } from '../../routes/coordinator';
 import { useNavigate } from 'react-router-dom';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import { Alert, Grid } from '@mui/material';
+import { theme } from '../../styles';
 
 export const Card = ({
     creator,
@@ -58,111 +70,135 @@ export const Card = ({
 
     const isFeedpage = path.includes('feedpage');
 
+    const balancePositive = likesCount - dislikesCount;
+
     return (
         <ContainerContentCard>
-            <hr />
-            <TextCreatorContent>{creator}</TextCreatorContent>
-            {idPostToEdit === id && isEditing ? '' : content}
-            {boolenIsCurrentUser ? (
-                <div>
-                    <button
-                        onClick={(event) => {
-                            event.preventDefault();
-                            handleDelete(
-                                id,
-                                path.includes('feedpage')
-                                    ? DeletePost
-                                    : DeleteComment
-                            );
-                        }}
-                    >
-                        Excluir
-                    </button>
-                    <button
+            <TextCreatorContent>Enviado por: {creator}</TextCreatorContent>
+
+            {idPostToEdit === id && isEditing ? (
+                ''
+            ) : (
+                <ContainerTextContent
+                    onClick={(event) => {
+                        event.preventDefault();
+                        isFeedpage && goToCommentsPage(navigator, id);
+                    }}
+                >
+                    <ContentText>{content}</ContentText>
+                </ContainerTextContent>
+            )}
+
+            <ContainerButtons>
+                {idPostToEdit === id && isEditing ? (
+                    <div>
+                        <form
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                handleEdit(
+                                    id,
+                                    path.includes('feedpage')
+                                        ? EditPost
+                                        : EditComment
+                                );
+                            }}
+                        >
+                            <textarea
+                                value={editingContent}
+                                onChange={(event) =>
+                                    setEditingContent(event.target.value)
+                                }
+                                name='content'
+                            />
+                            <br />
+                            <button type='submit'>Salvar</button>
+                        </form>
+                    </div>
+                ) : (
+                    ''
+                )}
+
+                <ContainerLikesAndDislikes>
+                    <IconVectorUp
+                        src={images.vector_up}
                         onClick={(event) => {
                             event.preventDefault();
                             isFeedpage
-                                ? handleEditButtonClickPost(id, listContent)
-                                : handleEditButtonClickComment(id, listContent);
+                                ? handleLike(id, true, LikeAndDislikePost)
+                                : handleLike(id, true, LikeAndDislikeComment);
                         }}
-                    >
-                        Editar
-                    </button>
-                </div>
-            ) : (
-                ''
-            )}
+                    />
+                    <p>{balancePositive < 0 ? 0 : balancePositive}</p>
 
-            {idPostToEdit === id && isEditing ? (
-                <div>
-                    <form
-                        onSubmit={(event) => {
+                    <IconVectorDown
+                        src={images.vector_down}
+                        onClick={(event) => {
                             event.preventDefault();
-                            handleEdit(
-                                id,
-                                path.includes('feedpage')
-                                    ? EditPost
-                                    : EditComment
-                            );
+                            isFeedpage
+                                ? handleLike(id, false, LikeAndDislikePost)
+                                : handleLike(id, false, LikeAndDislikeComment);
                         }}
-                    >
-                        <textarea
-                            value={editingContent}
-                            onChange={(event) =>
-                                setEditingContent(event.target.value)
-                            }
-                            name='content'
+                    />
+                </ContainerLikesAndDislikes>
+
+                {commentsCount !== undefined ? (
+                    <ContainerImgComments>
+                        <ImageComment
+                            onClick={() => {
+                                goToCommentsPage(navigator, id);
+                            }}
+                            src={images.comment_icon}
                         />
-                        <br />
-                        <button type='submit'>Salvar</button>
-                    </form>
-                </div>
-            ) : (
-                ''
-            )}
+                        <p>{commentsCount}</p>
+                    </ContainerImgComments>
+                ) : (
+                    ''
+                )}
 
-            <IconVectorUp
-                src={images.vector_up}
-                onClick={(event) => {
-                    event.preventDefault();
-                    isFeedpage
-                        ? handleLike(id, true, LikeAndDislikePost)
-                        : handleLike(id, true, LikeAndDislikeComment);
-                }}
-            />
-            <p>{likesCount}</p>
+                {boolenIsCurrentUser ? (
+                    <ContainerDeleteAndEdit>
+                        <Grid item sx={{ color: theme.palette.gray[2] }}>
+                            <ModeEditOutlineOutlinedIcon
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    isFeedpage
+                                        ? handleEditButtonClickPost(
+                                              id,
+                                              listContent
+                                          )
+                                        : handleEditButtonClickComment(
+                                              id,
+                                              listContent
+                                          );
+                                }}
+                            />
+                        </Grid>
+                        <Grid item sx={{ color: theme.palette.gray[2] }}>
+                            <DeleteOutlinedIcon
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    handleDelete(
+                                        id,
+                                        path.includes('feedpage')
+                                            ? DeletePost
+                                            : DeleteComment
+                                    );
+                                }}
+                            />
+                        </Grid>
+                    </ContainerDeleteAndEdit>
+                ) : (
+                    ''
+                )}
 
-            <IconVectorDown
-                src={images.vector_down}
-                onClick={(event) => {
-                    event.preventDefault();
-                    isFeedpage
-                        ? handleLike(id, false, LikeAndDislikePost)
-                        : handleLike(id, false, LikeAndDislikeComment);
-                }}
-            />
-            <p>{dislikesCount}</p>
-
-            {boolenIsCurrentUser &&
-                idPostMessageError === id &&
-                errorMessagePost && <p>{errorMessagePost}</p>}
-
-            {commentsCount ? (
-                <div>
-                    <p> COMENTÁRIOS: {commentsCount}</p>
-                    <button
-                        onClick={() => {
-                            goToCommentsPage(navigator, id);
-                        }}
-                    >
-                        Comentários
-                    </button>
-                </div>
-            ) : (
-                ''
-            )}
-
-            <hr />
+                {boolenIsCurrentUser &&
+                    idPostMessageError === id &&
+                    errorMessagePost && (
+                        <ContainerAlert>
+                            <Alert severity='warning'>{errorMessagePost}</Alert>
+                        </ContainerAlert>
+                    )}
+            </ContainerButtons>
         </ContainerContentCard>
     );
 };

@@ -49,6 +49,8 @@ export const ContainerFormsFeedpage = styled.div`
 export const DivisorFeed = styled.div`
     height: 1px;
     background: ${theme.backgrounds[1]};
+    margin: 1rem 1rem;
+    width: 90%;
 `;
 
 export const BtnCreatePost = styled.button`

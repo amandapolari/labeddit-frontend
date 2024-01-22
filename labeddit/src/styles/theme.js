@@ -13,6 +13,7 @@ export const theme = createTheme({
             4: '#EDEDED', // background header signup | background da textare de criar post e commentário
             5: '#FBFBFB', // background de cada card de post e comentário
             6: '#E5E5E5', // bg do login
+            7: '#ECECEC', // bg do signup
         },
         white: {
             1: '#FFFFFF', // background all pages | e cor de dentro do botão com background orange

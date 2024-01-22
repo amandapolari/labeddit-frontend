@@ -143,7 +143,7 @@ export const CommentsPage = () => {
                     <p>LIKES: {posts && posts.likesCount}</p>
                     <p>DISLIKES: {posts && posts.dislikesCount}</p>
                     <p>NÚMERO DE COMENTÁRIOS: {posts && posts.commentsCount}</p>
-                    <p>COMENTÁRIOS:</p>
+                    {/* <p>COMENTÁRIOS:</p> */}
                     {posts.comments &&
                         posts.comments.map((comment) => (
                             <div key={comment.id}>
