@@ -87,6 +87,7 @@ export const ImageLogo = styled.img`
 `;
 
 export const ContainerForms = styled.div`
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;

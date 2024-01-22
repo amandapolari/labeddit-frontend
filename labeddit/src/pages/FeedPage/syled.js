@@ -6,7 +6,6 @@ export const TextareaCreatePost = styled.textarea`
     border: none;
     border-radius: 12px;
     min-height: 12vh;
-    /* width: 80vw; */
     width: 90%;
     color: ${theme.palette.gray[2]};
     font-family: 'IBM Plex Sans';
@@ -16,27 +15,19 @@ export const TextareaCreatePost = styled.textarea`
     font-weight: 400;
     line-height: normal;
     margin-bottom: 0;
+    &:focus {
+        outline: none;
+    }
 `;
 
-export const ContainerFeedpage = styled.div`
-    /* border: 3px solid red; */
-`;
+export const ContainerFeedpage = styled.div``;
 
 export const ContainerContentFeedpage = styled.div`
-    /* border: 3px solid green; */
     padding: 2rem;
 `;
 
 export const ContainerFormsFeedpage = styled.div`
-    /* border: 3px solid red; */
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem; */
-
     form {
-        /* border: 3px solid green; */
         margin-bottom: 2rem;
         display: flex;
         width: 100%;

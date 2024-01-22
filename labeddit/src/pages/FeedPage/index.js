@@ -3,7 +3,7 @@
 import { useNavigate } from 'react-router';
 import { useProtectPage } from '../../hooks/useProtectPage';
 import useRequestData from '../../hooks/useRequestData';
-import { Logout, urlPosts } from '../../constants/constants';
+import { urlPosts } from '../../constants/constants';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { CreatePost } from '../../services/api';

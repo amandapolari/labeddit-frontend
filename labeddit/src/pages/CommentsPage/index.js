@@ -6,14 +6,17 @@ import useRequestData from '../../hooks/useRequestData';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
 import { urlPosts } from '../../constants/constants';
-import {
-    CreateComment,
-    DeleteComment,
-    EditComment,
-    LikeAndDislikeComment,
-} from '../../services/api';
+import { CreateComment } from '../../services/api';
 import { useForm } from '../../hooks/useForm';
 import { Card, Error, Header, Loading } from '../../components';
+import {
+    BtnCreateComment,
+    ContainerCommentsPage,
+    ContainerContentCommentsPage,
+    ContainerFormsCommentsPage,
+    DivisorComments,
+    TextareaCreateComment,
+} from './syled';
 
 export const CommentsPage = () => {
     const [form, setForm, onChange, resetForm] = useForm({
@@ -104,65 +107,82 @@ export const CommentsPage = () => {
     };
 
     return (
-        <div>
+        <ContainerCommentsPage>
             <Header
                 isCommentPage={isCommentPage}
                 isSignupPage={isSignupPage}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
-            <p>Comments Page</p>
+            <ContainerContentCommentsPage>
+                {errorMessage && <p>{errorMessage}</p>}
 
-            {errorMessage && <p>{errorMessage}</p>}
+                {isLoading ? (
+                    <Loading />
+                ) : isError ? (
+                    <Error />
+                ) : (
+                    <div>
+                        <Card
+                            creator={
+                                posts && posts.creator && posts.creator.nickname
+                            }
+                            id={posts.id}
+                            content={posts.content}
+                            boolenIsCurrentUser={posts.isCurrentUserComment}
+                            likesCount={posts.likesCount}
+                            dislikesCount={posts.dislikesCount}
+                            postsCount={posts.postsCount}
+                            listContent={posts}
+                            commentsCount={posts.commentsCount}
+                        />
+                    </div>
+                )}
 
-            <form
-                onSubmit={(event) => {
-                    event.preventDefault();
-                    handleSubmit();
-                }}
-            >
-                <textarea
-                    placeholder='Escreva seu comentário'
-                    value={form.content}
-                    onChange={onChange}
-                    name='content'
-                />
-                <br />
-                <button type='submit'>Responder</button>
-            </form>
-            {isLoading ? (
-                <Loading />
-            ) : isError ? (
-                <Error />
-            ) : (
-                <div>
-                    <p>
-                        CRIADOR:{' '}
-                        {posts && posts.creator && posts.creator.nickname}
-                    </p>
-                    <p>CONTEUDO: {posts && posts.content}</p>
-                    <p>LIKES: {posts && posts.likesCount}</p>
-                    <p>DISLIKES: {posts && posts.dislikesCount}</p>
-                    <p>NÚMERO DE COMENTÁRIOS: {posts && posts.commentsCount}</p>
-                    {/* <p>COMENTÁRIOS:</p> */}
-                    {posts.comments &&
-                        posts.comments.map((comment) => (
-                            <div key={comment.id}>
-                                <Card
-                                    creator={comment.creator.nickname}
-                                    id={comment.id}
-                                    content={comment.content}
-                                    boolenIsCurrentUser={
-                                        comment.isCurrentUserComment
-                                    }
-                                    likesCount={comment.likesCount}
-                                    dislikesCount={comment.dislikesCount}
-                                    commentsCount={comment.commentsCount}
-                                    listContent={posts}
-                                />
-                            </div>
-                        ))}{' '}
-                </div>
-            )}
-        </div>
+                <ContainerFormsCommentsPage>
+                    <form
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            handleSubmit();
+                        }}
+                    >
+                        <TextareaCreateComment
+                            placeholder='Adicionar comentário'
+                            value={form.content}
+                            onChange={onChange}
+                            name='content'
+                        />
+                        <br />
+                        <BtnCreateComment type='submit'>
+                            Responder
+                        </BtnCreateComment>
+                        <DivisorComments />
+                    </form>
+                </ContainerFormsCommentsPage>
+                {isLoading ? (
+                    <Loading />
+                ) : isError ? (
+                    <Error />
+                ) : (
+                    <div>
+                        {posts.comments &&
+                            posts.comments.map((comment) => (
+                                <div key={comment.id}>
+                                    <Card
+                                        creator={comment.creator.nickname}
+                                        id={comment.id}
+                                        content={comment.content}
+                                        boolenIsCurrentUser={
+                                            comment.isCurrentUserComment
+                                        }
+                                        likesCount={comment.likesCount}
+                                        dislikesCount={comment.dislikesCount}
+                                        listContent={posts}
+                                    />
+                                </div>
+                            ))}{' '}
+                    </div>
+                )}
+            </ContainerContentCommentsPage>
+        </ContainerCommentsPage>
     );
 };

@@ -16,7 +16,6 @@ export const ContainerContentCard = styled.div`
     /* grid-template-rows: 12vw 20vw 1fr; */
     /* FUNCIONA MELHOR!!: */
     grid-template-rows: 0.2fr 0.5fr 0.2fr;
-    /* align-items: center; */
     justify-content: center;
 `;
 
@@ -52,11 +51,9 @@ export const ContainerButtons = styled.div`
     grid-column: 1/8;
     grid-row: 3/4;
     display: flex;
-    /* align-items: flex-end; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 7vh 1fr;
-    /* border: 1px solid blue; */
 
     div {
         /* border: 1px solid red; */
@@ -122,18 +119,13 @@ export const ContainerAlert = styled.div`
 `;
 
 export const ContainerEditPost = styled.div`
-    /* border: 1px solid red; */
     display: grid;
     grid-column: 1/8;
-    /* grid-row: 1/2; */
     height: 100%;
 
     form {
         grid-column: 1/7;
         grid-row: 2/3;
-        /* margin-bottom: 1rem; */
-        /* border: 1px solid orange; */
-        /* Arrumar depois: */
         margin-top: -8vh;
     }
 `;

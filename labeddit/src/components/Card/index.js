@@ -37,7 +37,6 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Alert, Grid } from '@mui/material';
 import { theme } from '../../styles';
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
 export const Card = ({
     creator,
@@ -108,7 +107,7 @@ export const Card = ({
                             }}
                         >
                             <TextareaEditPost
-                            // style={{display: 'none'}}
+                                // style={{display: 'none'}}
                                 value={editingContent}
                                 onChange={(event) =>
                                     setEditingContent(event.target.value)
@@ -150,7 +149,7 @@ export const Card = ({
                     <ContainerImgComments>
                         <ImageComment
                             onClick={() => {
-                                goToCommentsPage(navigator, id);
+                                isFeedpage && goToCommentsPage(navigator, id);
                             }}
                             src={images.comment_icon}
                         />
