@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import {
+    ButtonSave,
     ContainerAlert,
     ContainerButtons,
     ContainerContentCard,
     ContainerDeleteAndEdit,
+    ContainerEditPost,
     ContainerGoToComments,
     ContainerImgComments,
     ContainerLikesAndDislikes,
@@ -14,6 +16,7 @@ import {
     ImageComment,
     TextAlert,
     TextCreatorContent,
+    TextareaEditPost,
 } from './syled';
 
 import images from '../../assets/importImages';
@@ -34,6 +37,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { Alert, Grid } from '@mui/material';
 import { theme } from '../../styles';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
 export const Card = ({
     creator,
@@ -91,7 +95,7 @@ export const Card = ({
 
             <ContainerButtons>
                 {idPostToEdit === id && isEditing ? (
-                    <div>
+                    <ContainerEditPost>
                         <form
                             onSubmit={(event) => {
                                 event.preventDefault();
@@ -103,7 +107,8 @@ export const Card = ({
                                 );
                             }}
                         >
-                            <textarea
+                            <TextareaEditPost
+                            // style={{display: 'none'}}
                                 value={editingContent}
                                 onChange={(event) =>
                                     setEditingContent(event.target.value)
@@ -111,9 +116,9 @@ export const Card = ({
                                 name='content'
                             />
                             <br />
-                            <button type='submit'>Salvar</button>
+                            <ButtonSave type='submit'>Salvar</ButtonSave>
                         </form>
-                    </div>
+                    </ContainerEditPost>
                 ) : (
                     ''
                 )}

@@ -15,7 +15,7 @@ import {
     ContainerFeedpage,
     ContainerFormsFeedpage,
     DivisorFeed,
-    Textarea,
+    TextareaCreatePost,
 } from './syled';
 
 export const FeedPage = () => {
@@ -120,7 +120,7 @@ export const FeedPage = () => {
                 {errorMessage && <p>{errorMessage}</p>}
                 <ContainerFormsFeedpage>
                     <form onSubmit={handleSubmit}>
-                        <Textarea
+                        <TextareaCreatePost
                             placeholder='Escreva seu post...'
                             value={form.content}
                             onChange={onChange}

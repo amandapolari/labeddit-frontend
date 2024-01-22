@@ -4,6 +4,7 @@ import { theme } from '../../styles';
 export const ContainerContentCard = styled.div`
     display: grid;
     width: 75vw;
+    height: 100%;
     padding: 1.5rem;
     margin-bottom: 1rem;
     background-color: ${theme.palette.gray[5]};
@@ -51,10 +52,11 @@ export const ContainerButtons = styled.div`
     grid-column: 1/8;
     grid-row: 3/4;
     display: flex;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 7vh 1fr;
+    /* border: 1px solid blue; */
 
     div {
         /* border: 1px solid red; */
@@ -63,22 +65,14 @@ export const ContainerButtons = styled.div`
 
 export const ImageComment = styled.img`
     width: 2vh;
-
-    /* width: 24px;
-    height: 24px; */
-    margin-right: 8px;
 `;
 
 export const IconVectorUp = styled.img`
     width: 2vh;
-    /* height: 24px; */
-    /* margin-right: 8px; */
 `;
 
 export const IconVectorDown = styled.img`
     width: 2vh;
-    /* height: 24px; */
-    /* margin-right: 8px; */
 `;
 
 export const ContainerLikesAndDislikes = styled.div`
@@ -125,4 +119,48 @@ export const ContainerAlert = styled.div`
     grid-column: 1/8;
     align-items: center;
     padding: 1rem 1rem 0 1rem;
+`;
+
+export const ContainerEditPost = styled.div`
+    /* border: 1px solid red; */
+    display: grid;
+    grid-column: 1/8;
+    /* grid-row: 1/2; */
+    height: 100%;
+
+    form {
+        grid-column: 1/7;
+        grid-row: 2/3;
+        /* margin-bottom: 1rem; */
+        /* border: 1px solid orange; */
+        /* Arrumar depois: */
+        margin-top: -8vh;
+    }
+`;
+
+export const TextareaEditPost = styled.textarea`
+    background-color: ${theme.palette.gray[4]};
+    color: ${theme.palette.gray[2]};
+    border: none;
+    border-radius: 8px;
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 0.2rem;
+    width: 85%;
+    height: 9vh;
+
+    grid-column: 1/8;
+    grid-row: 2/3;
+`;
+
+export const ButtonSave = styled.button`
+    border: 0.797px solid ${theme.palette.gray[7]};
+    background: ${theme.palette.white[1]};
+    border-radius: 8px;
+    padding: 0.2rem;
+    display: flex;
+    align-self: flex-end;
+    margin: 0.3rem 0 0.3rem 0;
 `;

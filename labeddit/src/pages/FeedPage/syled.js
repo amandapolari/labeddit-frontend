@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../styles';
 
-export const Textarea = styled.textarea`
+export const TextareaCreatePost = styled.textarea`
     background-color: ${theme.palette.gray[4]};
     border: none;
     border-radius: 12px;
