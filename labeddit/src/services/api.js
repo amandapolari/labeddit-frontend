@@ -24,9 +24,12 @@ const handleRequestError = (error, setErrorMessage) => {
 export const Login = async (body, setErrorMessage) => {
     try {
         const { data } = await axios.post(`${BASE_URL}users/login`, body);
+        // console.log('Resposta de sucesso:', data);
+        console.log(data);
         return data;
     } catch (error) {
         handleRequestError(error, setErrorMessage);
+        console.log('Resposta de erro:', error);
     }
 };
 

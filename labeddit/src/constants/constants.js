@@ -1,5 +1,5 @@
 // Colocar aqui a base url da API após o deploy
-export const BASE_URL = 'http://localhost:3003/';
+export const BASE_URL = 'https://labeddit-backend-kul7.onrender.com/';
 
 export const PATH = window.location.pathname;
 

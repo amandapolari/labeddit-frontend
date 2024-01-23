@@ -63,6 +63,8 @@ export const LoginPage = () => {
             };
 
             const response = await Login(body, setErrorMessage);
+
+            console.log('Resposta de sucesso:', response);
             if (response.message && response.token) {
                 (() => {
                     localStorage.setItem('token', response.token);
