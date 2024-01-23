@@ -214,6 +214,13 @@ export const SignupPage = () => {
                                 label='Senha'
                             />
                         </FormControl>
+                        {messageCheckbox && (
+                            <MessageAlertCheckbox>
+                                <Alert severity='warning'>
+                                    {messageCheckbox}
+                                </Alert>
+                            </MessageAlertCheckbox>
+                        )}
                         <ContainerTermsOfUse>
                             Ao continuar, você concorda com o nosso{' '}
                             <b style={{ color: theme.palette.blue[1] }}>
@@ -234,13 +241,6 @@ export const SignupPage = () => {
                                     legais no Labeddit
                                 </LabelInputCheckbox>
                             </ContainerCheckbox>
-                            {messageCheckbox && (
-                                <MessageAlertCheckbox>
-                                    <Alert severity='warning'>
-                                        {messageCheckbox}
-                                    </Alert>
-                                </MessageAlertCheckbox>
-                            )}
                         </ContainerTermsOfUse>
 
                         <BtnCreateAccount type={'submit'}>

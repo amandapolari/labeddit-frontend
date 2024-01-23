@@ -18,7 +18,9 @@ import {
 import {
     ButtonCreateAccount,
     ButtonLoginPage,
+    ContainerAlertLogin,
     ContainerButtonsLogin,
+    ContainerContentLogin,
     ContainerForms,
     ContainerLogoAndTitle,
     ContainerPageLogin,
@@ -80,71 +82,74 @@ export const LoginPage = () => {
             </ContainerLogoAndTitle>
 
             <ContainerForms>
-                <form onSubmit={handleSubmit}>
-                    <FormControl sx={{ width: '80vw' }} variant='outlined'>
-                        <InputLabel htmlFor='outlined-adornment-email'>
-                            E-mail
-                        </InputLabel>
-                        <OutlinedInput
-                            id='outlined-adornment-email'
-                            type='text'
-                            name='email'
-                            value={form.email}
-                            onChange={onChange}
-                            endAdornment={
-                                <InputAdornment position='end'></InputAdornment>
-                            }
-                            label='E-mail'
-                        />
-                    </FormControl>
-                    <FormControl
-                        sx={{ width: '80vw', marginTop: '1vh' }}
-                        variant='outlined'
-                    >
-                        <InputLabel htmlFor='outlined-adornment-password'>
-                            Senha
-                        </InputLabel>
-                        <OutlinedInput
-                            id='outlined-adornment-password'
-                            type={showPassword ? 'text' : 'password'}
-                            name='password'
-                            value={form.password}
-                            onChange={onChange}
-                            endAdornment={
-                                <InputAdornment position='end'>
-                                    <IconButton
-                                        aria-label='toggle password visibility'
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge='end'
-                                    >
-                                        {showPassword ? (
-                                            <VisibilityOff />
-                                        ) : (
-                                            <Visibility />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label='Senha'
-                        />
-                    </FormControl>
+                <ContainerContentLogin>
+                    <form onSubmit={handleSubmit}>
+                        <FormControl sx={{ width: '80vw' }} variant='outlined'>
+                            <InputLabel htmlFor='outlined-adornment-email'>
+                                E-mail
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-email'
+                                type='text'
+                                name='email'
+                                value={form.email}
+                                onChange={onChange}
+                                endAdornment={
+                                    <InputAdornment position='end'></InputAdornment>
+                                }
+                                label='E-mail'
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ width: '80vw', marginTop: '1vh' }}
+                            variant='outlined'
+                        >
+                            <InputLabel htmlFor='outlined-adornment-password'>
+                                Senha
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-password'
+                                type={showPassword ? 'text' : 'password'}
+                                name='password'
+                                value={form.password}
+                                onChange={onChange}
+                                endAdornment={
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            aria-label='toggle password visibility'
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                            edge='end'
+                                        >
+                                            {showPassword ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label='Senha'
+                            />
+                        </FormControl>
 
-                    {errorMessage && (
-                        <p>
-                            <Alert severity='warning'>{errorMessage}</Alert>
-                        </p>
-                    )}
+                        {errorMessage && (
+                            <ContainerAlertLogin>
+                                <Alert severity='warning'>{errorMessage}</Alert>
+                            </ContainerAlertLogin>
+                        )}
 
-                    <ContainerButtonsLogin>
-                        <ButtonLoginPage type='submit'>
-                            Continuar
-                        </ButtonLoginPage>
+                        <ContainerButtonsLogin>
+                            <ButtonLoginPage type='submit'>
+                                Continuar
+                            </ButtonLoginPage>
 
-                        {/* <button type='button' onClick={resetForm}>
+                            {/* <button type='button' onClick={resetForm}>
                     Resetar Formulário
                 </button> */}
-                        {/* 
+                            {/* 
                 <h3>Conta de teste</h3>
                 <p>amanda@gmail.com</p>
                 <p>Amanda@123</p>
@@ -160,18 +165,19 @@ export const LoginPage = () => {
                     Autopreencher
                 </button> */}
 
-                        <DivisorLoginPage />
+                            <DivisorLoginPage />
 
-                        <ButtonCreateAccount
-                            type='button'
-                            onClick={() => {
-                                goToSignupPage(navigator);
-                            }}
-                        >
-                            Crie uma conta!
-                        </ButtonCreateAccount>
-                    </ContainerButtonsLogin>
-                </form>
+                            <ButtonCreateAccount
+                                type='button'
+                                onClick={() => {
+                                    goToSignupPage(navigator);
+                                }}
+                            >
+                                Crie uma conta!
+                            </ButtonCreateAccount>
+                        </ContainerButtonsLogin>
+                    </form>
+                </ContainerContentLogin>
             </ContainerForms>
         </ContainerPageLogin>
     );

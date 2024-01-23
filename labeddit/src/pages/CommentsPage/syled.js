@@ -22,6 +22,9 @@ export const TextareaCreateComment = styled.textarea`
     font-weight: 400;
     line-height: normal;
     margin-bottom: 0.5rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 
     &:focus {
         outline: none;
@@ -30,7 +33,7 @@ export const TextareaCreateComment = styled.textarea`
 
 export const BtnCreateComment = styled.button`
     background: ${theme.backgrounds[1]};
-    width: 99%;
+    width: 100%;
     border: none;
     border-radius: 12px;
     height: 2.9rem;
@@ -41,8 +44,18 @@ export const BtnCreateComment = styled.button`
 `;
 
 export const DivisorComments = styled.div`
+
     height: 1px;
     background: ${theme.backgrounds[1]};
-    margin: 1rem 1rem;
-    width: 90%;
+    /* margin: 1rem 1rem ; */
+    margin: 1rem 0;
+    width: 100%;
+`;
+
+export const ContainerAlertCommentPage = styled.div`
+    padding: 0 0 1rem 0.2rem;
+    /* width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem; */
 `;

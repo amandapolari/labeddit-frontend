@@ -115,7 +115,10 @@ export const ContainerAlert = styled.div`
     grid-row: 2/3;
     grid-column: 1/8;
     align-items: center;
-    padding: 1rem 1rem 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 `;
 
 export const ContainerEditPost = styled.div`

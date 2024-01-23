@@ -86,6 +86,10 @@ export const ImageLogo = styled.img`
     } */
 `;
 
+export const ContainerContentLogin = styled.div`
+    /* border: 1px solid red; */
+`;
+
 export const ContainerForms = styled.div`
     /* border: 1px solid red; */
     display: flex;
@@ -102,20 +106,33 @@ export const ContainerForms = styled.div`
     }
 
     @media (min-width: 375px) {
+        /* border: 8px solid red; */
     }
 
     @media (min-width: 769px) {
+        /* border: 8px solid blue; */
     }
 
     @media (min-width: 1024px) {
+        /* border: 8px solid orange;
+        padding: 0 15 0 15; */
     }
 
     @media (min-width: 1200px) {
+        /* border: 8px solid pink; */
+        /* form {
+            width: 50vw;
+        } */
+        /* display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-right: 10px; */
     }
 `;
 
 export const ButtonLoginPage = styled.button`
-    margin-top: 4rem;
+    margin-top: 6.5rem;
     background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
@@ -153,7 +170,7 @@ export const ContainerButtonsLogin = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    /* padding: 1rem; */
 
     @media (min-width: 375px) {
     }
@@ -166,4 +183,14 @@ export const ContainerButtonsLogin = styled.div`
 
     @media (min-width: 1200px) {
     }
+`;
+
+export const ContainerAlertLogin = styled.div`
+    /* margin-top: 0.1rem; */
+    width: 80vw;
+    position: absolute;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* border: 1px solid red; */
 `;

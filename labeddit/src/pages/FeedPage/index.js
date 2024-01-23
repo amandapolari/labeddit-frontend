@@ -11,12 +11,14 @@ import GlobalContext from '../../contexts/GlobalContext';
 import { Card, Error, Header, Loading, PostCard } from '../../components';
 import {
     BtnCreatePost,
+    ContainerAlertFeedpage,
     ContainerContentFeedpage,
     ContainerFeedpage,
     ContainerFormsFeedpage,
     DivisorFeed,
     TextareaCreatePost,
 } from './syled';
+import { Alert } from '@mui/material';
 
 export const FeedPage = () => {
     const navigator = useNavigate();
@@ -117,7 +119,6 @@ export const FeedPage = () => {
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
             <ContainerContentFeedpage>
-                {errorMessage && <p>{errorMessage}</p>}
                 <ContainerFormsFeedpage>
                     <form onSubmit={handleSubmit}>
                         <TextareaCreatePost
@@ -126,7 +127,12 @@ export const FeedPage = () => {
                             onChange={onChange}
                             name='content'
                         />
-                        <br />
+
+                        {errorMessage && (
+                            <ContainerAlertFeedpage>
+                                <Alert severity='warning'>{errorMessage}</Alert>
+                            </ContainerAlertFeedpage>
+                        )}
                         <BtnCreatePost type='submit'>Postar</BtnCreatePost>
                     </form>
                     <DivisorFeed />

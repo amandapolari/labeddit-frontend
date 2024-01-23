@@ -71,8 +71,12 @@ export const BtnCreateAccount = styled.button`
 `;
 
 export const MessageAlertCheckbox = styled.p`
-    margin-top: 1rem;
-    margin-bottom: 0;
+    /* margin-top: 1rem;
+    margin-bottom: 0; */
+    position: absolute;
+    /* border: 1px solid red; */
+    width: 81vw;
+    margin-top: 3rem;
 `;
 
 export const MessageAlertInputs = styled.p`

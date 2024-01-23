@@ -11,12 +11,14 @@ import { useForm } from '../../hooks/useForm';
 import { Card, Error, Header, Loading } from '../../components';
 import {
     BtnCreateComment,
+    ContainerAlertCommentPage,
     ContainerCommentsPage,
     ContainerContentCommentsPage,
     ContainerFormsCommentsPage,
     DivisorComments,
     TextareaCreateComment,
 } from './syled';
+import { Alert } from '@mui/material';
 
 export const CommentsPage = () => {
     const [form, setForm, onChange, resetForm] = useForm({
@@ -114,7 +116,7 @@ export const CommentsPage = () => {
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
             <ContainerContentCommentsPage>
-                {errorMessage && <p>{errorMessage}</p>}
+                {/* {errorMessage && <p>{errorMessage}</p>} */}
 
                 {isLoading ? (
                     <Loading />
@@ -152,6 +154,11 @@ export const CommentsPage = () => {
                             name='content'
                         />
                         <br />
+                        {errorMessage && (
+                            <ContainerAlertCommentPage>
+                                <Alert severity='warning'>{errorMessage}</Alert>
+                            </ContainerAlertCommentPage>
+                        )}
                         <BtnCreateComment type='submit'>
                             Responder
                         </BtnCreateComment>

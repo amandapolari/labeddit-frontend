@@ -14,7 +14,7 @@ export const TextareaCreatePost = styled.textarea`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     &:focus {
         outline: none;
     }
@@ -28,7 +28,7 @@ export const ContainerContentFeedpage = styled.div`
 
 export const ContainerFormsFeedpage = styled.div`
     form {
-        margin-bottom: 2rem;
+        /* margin-bottom: 2rem; */
         display: flex;
         width: 100%;
         flex-direction: column;
@@ -40,13 +40,13 @@ export const ContainerFormsFeedpage = styled.div`
 export const DivisorFeed = styled.div`
     height: 1px;
     background: ${theme.backgrounds[1]};
-    margin: 1rem 1rem;
-    width: 90%;
+    margin: 1rem 0;
+    width: 100%;
 `;
 
 export const BtnCreatePost = styled.button`
     background: ${theme.backgrounds[1]};
-    width: 99%;
+    width: 100%;
     border: none;
     border-radius: 12px;
     height: 2.9rem;
@@ -54,4 +54,12 @@ export const BtnCreatePost = styled.button`
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
+`;
+
+export const ContainerAlertFeedpage = styled.div`
+    padding: 0 0 1rem 0.2rem;
+    /* width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem; */
 `;
