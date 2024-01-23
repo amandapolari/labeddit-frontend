@@ -14,16 +14,19 @@ export const Header = ({
     isCommentPage,
     isSignupPage,
     isFeedOrCommentsPage,
+    isErrorPage,
 }) => {
+    const token = localStorage.getItem('token');
     const navigator = useNavigate();
     return (
         <ContainerHeaderComponent>
             <ImageClose
+                isErrorPage={isErrorPage}
                 isCommentPage={isCommentPage}
                 src={images.close_icon}
                 onClick={(event) => {
                     event.preventDefault();
-                    goToFeedPage(navigator);
+                    token ? goToFeedPage(navigator) : goToLoginPage(navigator);
                 }}
             />
             <ImageLogo alt='logo da labeddit' src={images.logo} />

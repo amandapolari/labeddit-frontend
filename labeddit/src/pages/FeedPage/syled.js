@@ -18,17 +18,23 @@ export const TextareaCreatePost = styled.textarea`
     &:focus {
         outline: none;
     }
+    @media (min-width: 768px) {
+        width: 95%;
+    }
 `;
 
 export const ContainerFeedpage = styled.div``;
 
 export const ContainerContentFeedpage = styled.div`
     padding: 2rem;
+
+    @media (min-width: 768px) {
+        margin: 0 50vh;
+    }
 `;
 
 export const ContainerFormsFeedpage = styled.div`
     form {
-        /* margin-bottom: 2rem; */
         display: flex;
         width: 100%;
         flex-direction: column;
@@ -58,8 +64,4 @@ export const BtnCreatePost = styled.button`
 
 export const ContainerAlertFeedpage = styled.div`
     padding: 0 0 1rem 0.2rem;
-    /* width: 90%;
-    margin: 0 auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem; */
 `;

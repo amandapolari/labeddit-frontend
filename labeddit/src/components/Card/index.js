@@ -79,7 +79,14 @@ export const Card = ({
 
     return (
         <ContainerContentCard>
-            <TextCreatorContent>Enviado por: {creator}</TextCreatorContent>
+            <TextCreatorContent
+                onClick={(event) => {
+                    event.preventDefault();
+                    isFeedpage && goToCommentsPage(navigator, id);
+                }}
+            >
+                Enviado por: {creator}
+            </TextCreatorContent>
 
             {idPostToEdit === id && isEditing ? (
                 ''

@@ -2,11 +2,20 @@ import styled from 'styled-components';
 import { theme } from '../../styles';
 
 export const ContainerCommentsPage = styled.div``;
+
 export const ContainerContentCommentsPage = styled.div`
     padding: 2rem;
+
+    @media (min-width: 768px) {
+        margin: 0 40vh;
+    }
 `;
 
-export const ContainerFormsCommentsPage = styled.div``;
+export const ContainerFormsCommentsPage = styled.div`
+    @media (min-width: 768px) {
+        width: 100%;
+    }
+`;
 
 export const TextareaCreateComment = styled.textarea`
     background-color: ${theme.palette.gray[4]};
@@ -22,12 +31,13 @@ export const TextareaCreateComment = styled.textarea`
     font-weight: 400;
     line-height: normal;
     margin-bottom: 0.5rem;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 
     &:focus {
         outline: none;
+    }
+
+    @media (min-width: 768px) {
+        width: 97%;
     }
 `;
 
@@ -44,18 +54,12 @@ export const BtnCreateComment = styled.button`
 `;
 
 export const DivisorComments = styled.div`
-
     height: 1px;
     background: ${theme.backgrounds[1]};
-    /* margin: 1rem 1rem ; */
     margin: 1rem 0;
     width: 100%;
 `;
 
 export const ContainerAlertCommentPage = styled.div`
     padding: 0 0 1rem 0.2rem;
-    /* width: 90%;
-    margin: 0 auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem; */
 `;

@@ -3,20 +3,20 @@ import { theme } from '../../styles';
 
 export const ContainerContentCard = styled.div`
     display: grid;
-    width: 75vw;
     height: 100%;
     padding: 1.5rem;
     margin-bottom: 1rem;
     background-color: ${theme.palette.gray[5]};
     border-radius: 12px;
     border: 1px solid ${theme.palette.gray[3]};
-    /* grid-template-columns: repeat(7, 1fr); */
     grid-template-columns: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
-    /* FUNCIONA BEM: */
-    /* grid-template-rows: 12vw 20vw 1fr; */
-    /* FUNCIONA MELHOR!!: */
     grid-template-rows: 0.2fr 0.5fr 0.2fr;
     justify-content: center;
+    @media (min-width: 768px) {
+        width: 95%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.2fr 0.5fr 0.2fr;
+    }
 `;
 
 export const TextCreatorContent = styled.p`

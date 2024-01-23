@@ -19,7 +19,8 @@ export const ImageLogo = styled.img`
 `;
 
 export const ImageClose = styled.img`
-    display: ${({ isCommentPage }) => (isCommentPage ? 'grid' : 'none')};
+    display: ${({ isCommentPage, isErrorPage }) =>
+        isCommentPage || isErrorPage ? 'grid' : 'none'};
     justify-self: start;
     grid-column: 1/2;
     grid-row: 1/2;

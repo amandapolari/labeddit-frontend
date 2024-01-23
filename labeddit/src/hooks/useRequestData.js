@@ -10,18 +10,19 @@ const useRequestData = (path, isUpdate) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}${path}`, {
-                    headers: {
-                        Authorization: localStorage.getItem('token'),
-                    },
-                });
+                setTimeout(async () => {
+                    const response = await axios.get(`${BASE_URL}${path}`, {
+                        headers: {
+                            Authorization: localStorage.getItem('token'),
+                        },
+                    });
 
-                // console.log('dados da API:', response.data);
-                response.data.results
-                    ? setData(response.data.results)
-                    : setData(response.data);
-                // console.log(response.data);
-                setIsLoading(false);
+                    // console.log('dados da API:', response.data);
+                    response.data.results
+                        ? setData(response.data.results)
+                        : setData(response.data);
+                    setIsLoading(false);
+                }, 250);
             } catch (error) {
                 console.log(error);
                 setIsLoading(false);

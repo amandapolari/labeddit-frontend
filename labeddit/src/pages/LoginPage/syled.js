@@ -64,34 +64,24 @@ export const ContainerLogoAndTitle = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-
-    /* @media (min-width: 375px) {
-        padding: 1.4rem;
-    }
-
-    @media (min-width: 769px) {
-    }
-
-    @media (min-width: 1024px) {
-        padding: 2rem 2rem;
-    } */
 `;
 
 export const ImageLogo = styled.img`
     width: 14vh;
     display: flex;
-
-    /* @media (min-width: 375px) {
-        width: 16vh;
-    } */
 `;
 
 export const ContainerContentLogin = styled.div`
-    /* border: 1px solid red; */
+    @media (min-width: 769px) {
+        form {
+            height: 92.6vh;
+            width: 50vw;
+            margin: 0 auto;
+        }
+    }
 `;
 
 export const ContainerForms = styled.div`
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,28 +96,15 @@ export const ContainerForms = styled.div`
     }
 
     @media (min-width: 375px) {
-        /* border: 8px solid red; */
     }
 
     @media (min-width: 769px) {
-        /* border: 8px solid blue; */
     }
 
     @media (min-width: 1024px) {
-        /* border: 8px solid orange;
-        padding: 0 15 0 15; */
     }
 
     @media (min-width: 1200px) {
-        /* border: 8px solid pink; */
-        /* form {
-            width: 50vw;
-        } */
-        /* display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-right: 10px; */
     }
 `;
 
@@ -145,7 +122,6 @@ export const ButtonLoginPage = styled.button`
 `;
 
 export const ButtonCreateAccount = styled.button`
-    /* margin-top: 1rem; */
     border: 1px solid ${theme.palette.orange[1]};
     color: ${theme.palette.orange[1]};
     background: ${theme.palette.white[1]};
@@ -161,7 +137,6 @@ export const DivisorLoginPage = styled.div`
     height: 1px;
     background: ${theme.backgrounds[1]};
     margin: 1rem 1rem;
-    // AJUSTAR POSICIONAMENTO:
     width: 100%;
 `;
 
@@ -170,12 +145,14 @@ export const ContainerButtonsLogin = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* padding: 1rem; */
 
     @media (min-width: 375px) {
     }
 
     @media (min-width: 769px) {
+        button {
+            width: 91vh;
+        }
     }
 
     @media (min-width: 1024px) {
@@ -186,11 +163,6 @@ export const ContainerButtonsLogin = styled.div`
 `;
 
 export const ContainerAlertLogin = styled.div`
-    /* margin-top: 0.1rem; */
     width: 80vw;
     position: absolute;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    /* border: 1px solid red; */
 `;

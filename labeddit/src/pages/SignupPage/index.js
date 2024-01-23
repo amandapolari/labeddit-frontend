@@ -11,13 +11,11 @@ import {
     BtnCreateAccount,
     ContainerCheckbox,
     ContainerContentSignup,
-    ContainerForms,
     ContainerFormsSignup,
     ContainerPageSignup,
     ContainerTermsOfUse,
     InputCheckbox,
     LabelInputCheckbox,
-    MessageAlert,
     MessageAlertCheckbox,
     MessageAlertInputs,
     TextApresentation,
@@ -149,7 +147,7 @@ export const SignupPage = () => {
                 <ContainerFormsSignup>
                     <form onSubmit={handleSubmit}>
                         <FormControl
-                            sx={{ m: 0.5, width: '38vh' }}
+                            sx={{ width: '100%', marginTop: '1vh' }}
                             variant='outlined'
                         >
                             <InputLabel htmlFor='outlined-adornment-nickname'>
@@ -165,7 +163,7 @@ export const SignupPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 0.5, width: '38vh' }}
+                            sx={{ width: '100%', marginTop: '1vh' }}
                             variant='outlined'
                         >
                             <InputLabel htmlFor='outlined-adornment-email'>
@@ -181,7 +179,7 @@ export const SignupPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 0.5, width: '38vh' }}
+                            sx={{ width: '100%', marginTop: '1vh' }}
                             variant='outlined'
                         >
                             <InputLabel htmlFor='outlined-adornment-password'>

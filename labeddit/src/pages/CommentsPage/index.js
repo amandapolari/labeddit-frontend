@@ -116,7 +116,6 @@ export const CommentsPage = () => {
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
             <ContainerContentCommentsPage>
-                {/* {errorMessage && <p>{errorMessage}</p>} */}
 
                 {isLoading ? (
                     <Loading />

@@ -2,14 +2,25 @@ import styled from 'styled-components';
 import { theme } from '../../styles';
 
 export const ContainerPageSignup = styled.div`
-    /* border: 2px solid red; */
     height: 100vh;
     background: ${theme.palette.white[1]};
 `;
 
 export const ContainerContentSignup = styled.div`
-    /* padding: 0 1.6rem 1.6rem 1.6rem; */
     padding: 1rem;
+
+    @media (min-width: 769px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50vw;
+        margin: 0 auto;
+        form {
+            height: 92.6vh;
+            width: 50vw;
+            margin: 0 auto;
+        }
+    }
 `;
 
 export const TextApresentation = styled.p`
@@ -18,20 +29,36 @@ export const TextApresentation = styled.p`
     font-weight: 700;
     text-align: left;
     margin-bottom: 10rem;
+
+    @media (min-width: 769px) {
+        width: 100%;
+        padding: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 0.1rem;
+        display: flex;
+        justify-content: left;
+    }
 `;
 
 export const ContainerFormsSignup = styled.div`
     display: flex;
     padding: 0 1.6rem 1.6rem 1.6rem;
-    /* Não tenho certeza se o design pede ao centro ou a esquerda */
     align-items: center;
     justify-content: center;
     form {
-        /* border: 2px solid red; */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    @media (min-width: 769px) {
+        width: 100%;
+        form {
+            button {
+                width: 91vh;
+            }
+        }
     }
 `;
 
@@ -57,7 +84,6 @@ export const LabelInputCheckbox = styled.label`
 `;
 
 export const BtnCreateAccount = styled.button`
-    /* margin-top: 4rem; */
     margin-top: 1rem;
     background: ${theme.backgrounds[1]};
     width: 80vw;
@@ -71,10 +97,7 @@ export const BtnCreateAccount = styled.button`
 `;
 
 export const MessageAlertCheckbox = styled.p`
-    /* margin-top: 1rem;
-    margin-bottom: 0; */
     position: absolute;
-    /* border: 1px solid red; */
     width: 81vw;
     margin-top: 3rem;
 `;

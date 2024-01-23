@@ -84,7 +84,7 @@ export const LoginPage = () => {
             <ContainerForms>
                 <ContainerContentLogin>
                     <form onSubmit={handleSubmit}>
-                        <FormControl sx={{ width: '80vw' }} variant='outlined'>
+                        <FormControl sx={{ width: '100%' }} variant='outlined'>
                             <InputLabel htmlFor='outlined-adornment-email'>
                                 E-mail
                             </InputLabel>
@@ -101,7 +101,7 @@ export const LoginPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ width: '80vw', marginTop: '1vh' }}
+                            sx={{ width: '100%', marginTop: '1vh' }}
                             variant='outlined'
                         >
                             <InputLabel htmlFor='outlined-adornment-password'>
@@ -146,24 +146,7 @@ export const LoginPage = () => {
                                 Continuar
                             </ButtonLoginPage>
 
-                            {/* <button type='button' onClick={resetForm}>
-                    Resetar Formulário
-                </button> */}
-                            {/* 
-                <h3>Conta de teste</h3>
-                <p>amanda@gmail.com</p>
-                <p>Amanda@123</p>
-                <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setForm({
-                            email: 'amanda@gmail.com',
-                            password: 'Amanda@123',
-                        });
-                    }}
-                >
-                    Autopreencher
-                </button> */}
+                            {/* <button type='button' onClick={resetForm}> Resetar Formulário</button> */}
 
                             <DivisorLoginPage />
 

@@ -13,34 +13,12 @@ const GlobalState = ({ children }) => {
     const [isSignupPage, setIsSignupPage] = useState(false);
     const [isFeedOrCommentsPage, setIsFeedOrCommentsPage] = useState(false);
     const [isCardMain, setIsCardMain] = useState(false);
-
-    // =============> CRUD DA API:
     const [isEditing, setIsEditing] = useState(false);
     const [idPostToEdit, setIdPostToEdit] = useState('');
     const [editingContent, setEditingContent] = useState('');
     const [idPostMessageError, setIdPostMessageError] = useState('');
+    const [isErrorPage, setIsErrorPage] = useState(false);
 
-    // -------------- POST:
-    // Não estou usando:
-    // const handleCreate = async (itemId, createFunction, content) => {
-    //     try {
-    //         const body = {
-    //             // é isso que precisa passar pra essa função:
-    //             // content: form.content,
-    //             content,
-    //         };
-    //         const response = await createFunction(
-    //             body,
-    //             itemId,
-    //             setErrorMessage
-    //         );
-    //         console.log(response);
-    //         // colocar onde a função for chamada
-    //         // response && resetForm();
-    //         setIsUpdate(!isUpdate);
-    //     } catch (error) {}
-    // };
-    // -------------- PUT:
     const handleEdit = async (itemId, editFunction) => {
         try {
             const body = {
@@ -76,7 +54,6 @@ const GlobalState = ({ children }) => {
         setEditingContent(commentToEdit.content);
     };
 
-    // -------------- DELETE:
     const handleDelete = async (itemId, deleteFunction) => {
         try {
             const response = await deleteFunction(itemId);
@@ -88,7 +65,6 @@ const GlobalState = ({ children }) => {
         }
     };
 
-    // =============> LIKE E DISLIKE DA API:
     const handleLike = async (itemId, likeValue, likeOrDislikeFunction) => {
         const body = { like: likeValue };
         const response = await likeOrDislikeFunction(
@@ -104,7 +80,6 @@ const GlobalState = ({ children }) => {
             setIdPostMessageError('');
         }, 3000);
     };
-    // =========================
 
     const datas = {
         dataReceivedFromApi,
@@ -135,12 +110,13 @@ const GlobalState = ({ children }) => {
         setIdPostToEdit,
         editingContent,
         setEditingContent,
-        // handleCreate,
         idPostMessageError,
         setIdPostMessageError,
         handleLike,
         isCardMain,
         setIsCardMain,
+        isErrorPage,
+        setIsErrorPage,
     };
 
     return (
