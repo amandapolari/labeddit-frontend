@@ -98,6 +98,7 @@ export const LikeAndDislikeComment = async (body, id, setErrorMessage) => {
         );
         return data;
     } catch (error) {
+        console.log('Resposta de erro:', error);
         handleRequestError(error, setErrorMessage);
     }
 };

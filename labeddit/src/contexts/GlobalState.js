@@ -12,7 +12,7 @@ const GlobalState = ({ children }) => {
     const [isCommentPage, setIsCommentPage] = useState(false);
     const [isSignupPage, setIsSignupPage] = useState(false);
     const [isFeedOrCommentsPage, setIsFeedOrCommentsPage] = useState(false);
-    const [isPostMain, setIsPostMain] = useState(false);
+    const [isCardMain, setIsCardMain] = useState(false);
 
     // =============> CRUD DA API:
     const [isEditing, setIsEditing] = useState(false);
@@ -139,8 +139,8 @@ const GlobalState = ({ children }) => {
         idPostMessageError,
         setIdPostMessageError,
         handleLike,
-        isPostMain,
-        setIsPostMain,
+        isCardMain,
+        setIsCardMain,
     };
 
     return (

@@ -47,6 +47,8 @@ export const Card = ({
     dislikesCount,
     commentsCount,
     listContent,
+    isCardMain,
+    setIsCardMain,
 }) => {
     const context = useContext(GlobalContext);
     const {
@@ -121,29 +123,57 @@ export const Card = ({
                 ) : (
                     ''
                 )}
+                {isCardMain ? (
+                    <ContainerLikesAndDislikes>
+                        <IconVectorUp
+                            src={images.vector_up}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                handleLike(id, true, LikeAndDislikePost);
+                            }}
+                        />
+                        <p>{balancePositive < 0 ? 0 : balancePositive}</p>
 
-                <ContainerLikesAndDislikes>
-                    <IconVectorUp
-                        src={images.vector_up}
-                        onClick={(event) => {
-                            event.preventDefault();
-                            isFeedpage
-                                ? handleLike(id, true, LikeAndDislikePost)
-                                : handleLike(id, true, LikeAndDislikeComment);
-                        }}
-                    />
-                    <p>{balancePositive < 0 ? 0 : balancePositive}</p>
+                        <IconVectorDown
+                            src={images.vector_down}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                handleLike(id, false, LikeAndDislikePost);
+                            }}
+                        />
+                    </ContainerLikesAndDislikes>
+                ) : (
+                    <ContainerLikesAndDislikes>
+                        <IconVectorUp
+                            src={images.vector_up}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                isFeedpage
+                                    ? handleLike(id, true, LikeAndDislikePost)
+                                    : handleLike(
+                                          id,
+                                          true,
+                                          LikeAndDislikeComment
+                                      );
+                            }}
+                        />
+                        <p>{balancePositive < 0 ? 0 : balancePositive}</p>
 
-                    <IconVectorDown
-                        src={images.vector_down}
-                        onClick={(event) => {
-                            event.preventDefault();
-                            isFeedpage
-                                ? handleLike(id, false, LikeAndDislikePost)
-                                : handleLike(id, false, LikeAndDislikeComment);
-                        }}
-                    />
-                </ContainerLikesAndDislikes>
+                        <IconVectorDown
+                            src={images.vector_down}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                isFeedpage
+                                    ? handleLike(id, false, LikeAndDislikePost)
+                                    : handleLike(
+                                          id,
+                                          false,
+                                          LikeAndDislikeComment
+                                      );
+                            }}
+                        />
+                    </ContainerLikesAndDislikes>
+                )}
 
                 {commentsCount !== undefined ? (
                     <ContainerImgComments>

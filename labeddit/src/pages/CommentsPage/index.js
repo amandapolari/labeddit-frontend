@@ -136,6 +136,7 @@ export const CommentsPage = () => {
                             postsCount={posts.postsCount}
                             listContent={posts}
                             commentsCount={posts.commentsCount}
+                            isCardMain={true}
                         />
                     </div>
                 )}
