@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { darkTheme, lightTheme, defaultTheme } from '../../styles/index';
-
-// console.log(darkTheme);
+import { theme } from '../../styles/index';
 
 /* RESPONSIVIDADE:
 
@@ -24,11 +22,7 @@ import { darkTheme, lightTheme, defaultTheme } from '../../styles/index';
 
 export const ContainerPageLogin = styled.div`
     padding: 1.5rem;
-    border: 2px solid red;
-    background: ${({ darkMode }) =>
-        darkMode
-            ? darkTheme.backgrounds.bg_page_gray_one
-            : lightTheme.palette.white.one};
+    background: ${theme.palette.white[1]};
     height: 94.5vh;
     display: flex;
     flex-direction: column;
@@ -52,9 +46,8 @@ export const SubtitleLogin = styled.h2`
     font-family: 'IBM Plex Sans';
     font-weight: 400;
     font-size: 0.8rem;
-    color: ${({ darkMode }) =>
-        darkMode ? darkTheme.palette.black.one : lightTheme.palette.black.two};
 
+    color: ${theme.palette.black[1]};
     @media (min-width: 769px) {
         font-size: 1rem;
     }
@@ -71,35 +64,36 @@ export const ContainerLogoAndTitle = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-
-    /* @media (min-width: 375px) {
-        padding: 1.4rem;
-    }
-
-    @media (min-width: 769px) {
-    }
-
-    @media (min-width: 1024px) {
-        padding: 2rem 2rem;
-    } */
 `;
 
 export const ImageLogo = styled.img`
     width: 14vh;
     display: flex;
+`;
 
-    /* @media (min-width: 375px) {
-        width: 16vh;
-    } */
+export const ContainerContentLogin = styled.div`
+    @media (min-width: 769px) {
+        form {
+            height: 92.6vh;
+            width: 50vw;
+            margin: 0 auto;
+        }
+    }
 `;
 
 export const ContainerForms = styled.div`
-    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
     @media (min-width: 375px) {
     }
@@ -115,33 +109,60 @@ export const ContainerForms = styled.div`
 `;
 
 export const ButtonLoginPage = styled.button`
-    margin-top: 4rem;
-    background: ${defaultTheme.backgrounds.bg_btn_login};
+    margin-top: 6.5rem;
+    background: ${theme.backgrounds[1]};
     width: 80vw;
     border: none;
-    border-radius: 2.5rem;
+    border-radius: 12px;
     height: 2.9rem;
-    color: ${lightTheme.palette.white.one};
+    color: ${theme.palette.white[1]};
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
 `;
 
 export const ButtonCreateAccount = styled.button`
-    /* margin-top: 1rem; */
-    border: 1px solid ${defaultTheme.palette.orange};
-    color: ${defaultTheme.palette.orange};
-    background: ${defaultTheme.palette.white.one};
+    border: 1px solid ${theme.palette.orange[1]};
+    color: ${theme.palette.orange[1]};
+    background: ${theme.palette.white[1]};
     width: 80vw;
-    border-radius: 2.5rem;
+    border-radius: 12px;
     height: 2.9rem;
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
 `;
 
-export const Hr = styled.hr`
-    /* width: 80vw; */
-    border: 1px solid ${defaultTheme.palette.orange};
+export const DivisorLoginPage = styled.div`
+    height: 1px;
+    background: ${theme.backgrounds[1]};
     margin: 1rem 1rem;
+    width: 100%;
+`;
+
+export const ContainerButtonsLogin = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: 375px) {
+    }
+
+    @media (min-width: 769px) {
+        button {
+            width: 91vh;
+        }
+    }
+
+    @media (min-width: 1024px) {
+    }
+
+    @media (min-width: 1200px) {
+    }
+`;
+
+export const ContainerAlertLogin = styled.div`
+    width: 80vw;
+    position: absolute;
 `;

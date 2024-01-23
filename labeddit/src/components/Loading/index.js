@@ -1,12 +1,14 @@
 import React from 'react';
-// import images from '../../assets/importImages';
-// import { ImgLoading } from '../Loading/LoadingStyle';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import { ContainerLoading } from './styled';
 
 export const Loading = () => {
     return (
-        <div>
-            {/* <ImgLoading src={images.loading} alt="imagem de loading" /> */}
-            <p>CARREGANDO..</p>
-        </div>
+        <ContainerLoading>
+            <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+                <LinearProgress color='inherit' />
+            </Stack>
+        </ContainerLoading>
     );
 };

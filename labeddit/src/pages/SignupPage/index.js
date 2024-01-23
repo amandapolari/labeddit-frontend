@@ -2,12 +2,35 @@
 /* eslint-disable no-unused-vars */
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
-import { goToFeedPage, goToLoginPage } from '../../routes/coordinator';
+import { goToFeedPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
-import { Header, ThemeSelector } from '../../components';
-import { ContainerPageSignup } from './syled';
+import { Header } from '../../components';
+import {
+    BtnCreateAccount,
+    ContainerCheckbox,
+    ContainerContentSignup,
+    ContainerFormsSignup,
+    ContainerPageSignup,
+    ContainerTermsOfUse,
+    InputCheckbox,
+    LabelInputCheckbox,
+    MessageAlertCheckbox,
+    MessageAlertInputs,
+    TextApresentation,
+} from './syled';
+import {
+    Alert,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { theme } from '../../styles';
 
 export const SignupPage = () => {
     const context = useContext(GlobalContext);
@@ -30,6 +53,14 @@ export const SignupPage = () => {
         email: '',
         password: '',
     });
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     useEffect(() => {
         setErrorMessage('');
@@ -102,74 +133,122 @@ export const SignupPage = () => {
                 isSignupPage={isSignupPage}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             />
-            <ThemeSelector />
+            <ContainerContentSignup>
+                <TextApresentation>
+                    Olá, boas vindas ao LabEddit ;)
+                </TextApresentation>
 
-            <p>SignupPage</p>
+                {errorMessage && (
+                    <MessageAlertInputs>
+                        <Alert severity='warning'>{errorMessage}</Alert>
+                    </MessageAlertInputs>
+                )}
 
-            <br />
+                <ContainerFormsSignup>
+                    <form onSubmit={handleSubmit}>
+                        <FormControl
+                            sx={{ width: '100%', marginTop: '1vh' }}
+                            variant='outlined'
+                        >
+                            <InputLabel htmlFor='outlined-adornment-nickname'>
+                                Apelido
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-nickname'
+                                type='text'
+                                label='Apelido'
+                                name='nickname'
+                                value={form.nickname}
+                                onChange={onChange}
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ width: '100%', marginTop: '1vh' }}
+                            variant='outlined'
+                        >
+                            <InputLabel htmlFor='outlined-adornment-email'>
+                                E-mail
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-email'
+                                type='text'
+                                label='E-mail'
+                                name='email'
+                                value={form.email}
+                                onChange={onChange}
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ width: '100%', marginTop: '1vh' }}
+                            variant='outlined'
+                        >
+                            <InputLabel htmlFor='outlined-adornment-password'>
+                                Senha
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-password'
+                                type={showPassword ? 'text' : 'password'}
+                                name='password'
+                                value={form.password}
+                                onChange={onChange}
+                                endAdornment={
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            aria-label='toggle password visibility'
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                            edge='end'
+                                        >
+                                            {showPassword ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label='Senha'
+                            />
+                        </FormControl>
+                        {messageCheckbox && (
+                            <MessageAlertCheckbox>
+                                <Alert severity='warning'>
+                                    {messageCheckbox}
+                                </Alert>
+                            </MessageAlertCheckbox>
+                        )}
+                        <ContainerTermsOfUse>
+                            Ao continuar, você concorda com o nosso{' '}
+                            <b style={{ color: theme.palette.blue[1] }}>
+                                Contrato de Usuário
+                            </b>{' '}
+                            e nossa{' '}
+                            <b style={{ color: theme.palette.blue[1] }}>
+                                Política de Privacidade .
+                            </b>
+                            <ContainerCheckbox>
+                                <InputCheckbox
+                                    type='checkbox'
+                                    checked={isChecked}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <LabelInputCheckbox>
+                                    Eu concordo em receber emails sobre coisas
+                                    legais no Labeddit
+                                </LabelInputCheckbox>
+                            </ContainerCheckbox>
+                        </ContainerTermsOfUse>
 
-            {errorMessage && <p>{errorMessage}</p>}
+                        <BtnCreateAccount type={'submit'}>
+                            Cadastrar
+                        </BtnCreateAccount>
 
-            <button
-                type='button'
-                onClick={() => {
-                    goToLoginPage(navigator);
-                }}
-            >
-                Entrar
-            </button>
-            <br />
-            <br />
-
-            <form onSubmit={handleSubmit}>
-                <label>Apelido</label>
-                <input
-                    type='text'
-                    name='nickname'
-                    value={form.nickname}
-                    onChange={onChange}
-                />
-
-                <br />
-
-                <label>E-mail</label>
-                <input
-                    type='text'
-                    name='email'
-                    value={form.email}
-                    onChange={onChange}
-                />
-
-                <br />
-                <label>Senha</label>
-                <input
-                    type='text'
-                    name='password'
-                    value={form.password}
-                    onChange={onChange}
-                />
-
-                <br />
-
-                <div>
-                    <label>
-                        Concordo com os termos de uso
-                        <input
-                            type='checkbox'
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                        />
-                    </label>
-
-                    {messageCheckbox && <p>{messageCheckbox}</p>}
-                </div>
-                <br />
-                <button type={'submit'}>Cadastrar</button>
-                <br />
-                <button type='button' onClick={resetForm}>
-                    Resetar Formulário
-                </button>
-            </form>
+                        {/* <button type='button' onClick={resetForm}>Resetar Formulário</button> */}
+                    </form>
+                </ContainerFormsSignup>
+            </ContainerContentSignup>
         </ContainerPageSignup>
     );
 };

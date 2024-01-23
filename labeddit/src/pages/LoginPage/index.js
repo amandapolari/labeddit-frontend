@@ -15,13 +15,16 @@ import {
     InputLabel,
     OutlinedInput,
 } from '@mui/material';
-import { ThemeSelector } from '../../components';
 import {
     ButtonCreateAccount,
     ButtonLoginPage,
+    ContainerAlertLogin,
+    ContainerButtonsLogin,
+    ContainerContentLogin,
     ContainerForms,
     ContainerLogoAndTitle,
     ContainerPageLogin,
+    DivisorLoginPage,
     Hr,
     ImageLogo,
     SubtitleLogin,
@@ -33,7 +36,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export const LoginPage = () => {
     const navigator = useNavigate();
     const context = useContext(GlobalContext);
-    const { errorMessage, setErrorMessage, darkMode } = context;
+    const { errorMessage, setErrorMessage } = context;
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -70,8 +73,7 @@ export const LoginPage = () => {
     };
 
     return (
-        <ContainerPageLogin darkMode={darkMode}>
-            <ThemeSelector />
+        <ContainerPageLogin>
             <ContainerLogoAndTitle>
                 <ImageLogo alt='logo da labeddit' src={images.logo_and_title} />
                 <SubtitleLogin>
@@ -80,119 +82,85 @@ export const LoginPage = () => {
             </ContainerLogoAndTitle>
 
             <ContainerForms>
-                <form onSubmit={handleSubmit}>
-                    <FormControl sx={{ width: '80vw' }} variant='outlined'>
-                        {/* <input
-                        type='text'
-                        name='email'
-                        placeholder='E-mail'
-                        value={form.email}
-                        onChange={onChange}
-                    /> */}
-
-                        {/* ---------------- */}
-                        <InputLabel
-                            htmlFor='outlined-adornment-email'
-                            // sx={
-                            //     darkMode
-                            //         ? { backgroundColor: 'black' }
-                            //         : { backgroundColor: 'white' }
-                            // }
+                <ContainerContentLogin>
+                    <form onSubmit={handleSubmit}>
+                        <FormControl sx={{ width: '100%' }} variant='outlined'>
+                            <InputLabel htmlFor='outlined-adornment-email'>
+                                E-mail
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-email'
+                                type='text'
+                                name='email'
+                                value={form.email}
+                                onChange={onChange}
+                                endAdornment={
+                                    <InputAdornment position='end'></InputAdornment>
+                                }
+                                label='E-mail'
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ width: '100%', marginTop: '1vh' }}
+                            variant='outlined'
                         >
-                            E-mail
-                        </InputLabel>
-                        <OutlinedInput
-                            id='outlined-adornment-email'
-                            type='text'
-                            name='email'
-                            value={form.email}
-                            onChange={onChange}
-                            endAdornment={
-                                <InputAdornment position='end'></InputAdornment>
-                            }
-                            label='email'
-                        />
-                    </FormControl>
-                    <FormControl
-                        sx={{ width: '80vw', marginTop: '1vh' }}
-                        variant='outlined'
-                    >
-                        {/* <input
-                    type='text'
-                    name='password'
-                    placeholder='Senha'
-                    value={form.password}
-                    onChange={onChange}
-                    /> */}
-                        <InputLabel htmlFor='outlined-adornment-password'>
-                            Password
-                        </InputLabel>
-                        <OutlinedInput
-                            id='outlined-adornment-password'
-                            type={showPassword ? 'text' : 'password'}
-                            name='password'
-                            value={form.password}
-                            onChange={onChange}
-                            endAdornment={
-                                <InputAdornment position='end'>
-                                    <IconButton
-                                        aria-label='toggle password visibility'
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge='end'
-                                    >
-                                        {showPassword ? (
-                                            <VisibilityOff />
-                                        ) : (
-                                            <Visibility />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label='Password'
-                        />
-                    </FormControl>
+                            <InputLabel htmlFor='outlined-adornment-password'>
+                                Senha
+                            </InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-password'
+                                type={showPassword ? 'text' : 'password'}
+                                name='password'
+                                value={form.password}
+                                onChange={onChange}
+                                endAdornment={
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            aria-label='toggle password visibility'
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                            edge='end'
+                                        >
+                                            {showPassword ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label='Senha'
+                            />
+                        </FormControl>
 
-                    {/* {errorMessage && <p>{errorMessage}</p>} */}
+                        {errorMessage && (
+                            <ContainerAlertLogin>
+                                <Alert severity='warning'>{errorMessage}</Alert>
+                            </ContainerAlertLogin>
+                        )}
 
-                    {errorMessage && (
-                        <p>
-                            <Alert severity='warning'>{errorMessage}</Alert>
-                        </p>
-                    )}
+                        <ContainerButtonsLogin>
+                            <ButtonLoginPage type='submit'>
+                                Continuar
+                            </ButtonLoginPage>
 
-                    <ButtonLoginPage type='submit'>Continuar</ButtonLoginPage>
+                            {/* <button type='button' onClick={resetForm}> Resetar Formulário</button> */}
 
-                    {/* <button type='button' onClick={resetForm}>
-                    Resetar Formulário
-                </button> */}
-                    {/* 
-                <h3>Conta de teste</h3>
-                <p>amanda@gmail.com</p>
-                <p>Amanda@123</p>
-                <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setForm({
-                            email: 'amanda@gmail.com',
-                            password: 'Amanda@123',
-                        });
-                    }}
-                >
-                    Autopreencher
-                </button> */}
+                            <DivisorLoginPage />
 
-                    <Hr />
-
-                    <ButtonCreateAccount
-                        type='button'
-                        onClick={() => {
-                            goToSignupPage(navigator);
-                        }}
-                    >
-                        Crie uma conta!
-                    </ButtonCreateAccount>
-                </form>
+                            <ButtonCreateAccount
+                                type='button'
+                                onClick={() => {
+                                    goToSignupPage(navigator);
+                                }}
+                            >
+                                Crie uma conta!
+                            </ButtonCreateAccount>
+                        </ContainerButtonsLogin>
+                    </form>
+                </ContainerContentLogin>
             </ContainerForms>
         </ContainerPageLogin>
     );
