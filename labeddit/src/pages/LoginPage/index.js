@@ -54,8 +54,16 @@ export const LoginPage = () => {
         setErrorMessage('');
     }, [form]);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(com)$/;
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!emailRegex.test(form.email)) {
+            setErrorMessage('Por favor, adicione um e-mail válido');
+            return;
+        }
+
         try {
             const body = {
                 email: form.email,
@@ -92,7 +100,7 @@ export const LoginPage = () => {
                             </InputLabel>
                             <OutlinedInput
                                 id='outlined-adornment-email'
-                                type='text'
+                                type='email'
                                 name='email'
                                 value={form.email}
                                 onChange={onChange}
