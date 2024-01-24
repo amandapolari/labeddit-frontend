@@ -123,7 +123,7 @@ Caso não tenha instalado:
     npm -v
     ```
 
--   Se rodando os dois últimos comandos vc obteve a versão do node e do npm, acesse a _raiz_ do projeto e então rode o seguinte comando:
+-   Se rodando os dois últimos comandos obteve a versão do node e do npm, acesse a _raiz_ do projeto e então rode o seguinte comando:
 
     ```bash
     npm install
