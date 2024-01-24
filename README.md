@@ -1,13 +1,9 @@
 <h1 align="center">Projeto Labeddit Frontend</h1>
 <div align="center">
 
-> Clique [aqui](https://github.com/amandapolari/labeddit-backend) para acessar repositório do Back-End do projeto Labeddit
-
 ![funcionamento-site-gif](./labeddit/src/assets/images/operation-application.gif)
 
 Clique [**AQUI**](https://labeddit-frontend.onrender.com) para conferir o resultado final do site!
-
-</div>
 
 <p align="center">
 <span><strong>Tecnologias e Ferramentas utilizadas:</strong></span>
@@ -18,6 +14,10 @@ Clique [**AQUI**](https://labeddit-frontend.onrender.com) para conferir o result
 </p>
 
 <p align="center"><strong>Status do Projeto:<br></strong> <i>Concluído</i> ✔</p>
+
+> Clique [aqui](https://github.com/amandapolari/labeddit-backend) para acessar repositório do Back-End do projeto Labeddit
+
+</div>
 
 ## Índice
 
