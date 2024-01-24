@@ -3,7 +3,7 @@
 
 > Clique [aqui](https://github.com/amandapolari/labeddit-backend) para acessar repositório do Back-End do projeto Labeddit
 
-<!-- ![funcionamento-site-gif](./pokedex/src/assets/images/site.gif) -->
+![funcionamento-site-gif](./labeddit/src/assets/images/operation-application.gif)
 
 Clique [**AQUI**](https://labeddit-frontend.onrender.com) para conferir o resultado final do site!
 
@@ -17,9 +17,7 @@ Clique [**AQUI**](https://labeddit-frontend.onrender.com) para conferir o result
   </a>
 </p>
 
-<p align="center"><strong>Status do Projeto:<br></strong> <i>Em construção</i> 🚧</p>
-
-<!-- <i>Concluído</i> ✔ -->
+<p align="center"><strong>Status do Projeto:<br></strong> <i>Concluído</i> ✔</p>
 
 ## Índice
 
@@ -83,7 +81,7 @@ O Labeddit oferece diversas funcionalidades aos usuários, inclusive um CRUD com
 ## 4. Protótipo
 
 [🔝](#índice)<br>
-O Design de app mobile first foi fornecido pela Labenu, se preferir acesso direto pelo Figma clique **[aqui](https://www.figma.com/file/Ks2VBBhW0tN4p9g2ZtZtXE/Projeto-Integrador-Labeddit?type=design&node-id=0%3A1&mode=design&t=2qjhW6dWtWzmEM15-1)**, ou então acompanhe as imagens abaixo:
+O Design de app **mobile first** foi fornecido pela Labenu, se preferir acesso direto pelo Figma clique **[aqui](https://www.figma.com/file/Ks2VBBhW0tN4p9g2ZtZtXE/Projeto-Integrador-Labeddit?type=design&node-id=0%3A1&mode=design&t=2qjhW6dWtWzmEM15-1)**, ou então acompanhe as imagens abaixo:
 
 ### Login
 
@@ -161,7 +159,7 @@ O frontend do projeto labeddit foi construído com:
 
 -   [✔️] Respeitar o layout do Figma
 -   [✔️] Uso do ReactJS
--   [ _ ] Site deployado
+-   [✔️] Site deployado
 -   [✔️] Documentação README
 
 ## 9. Desenvolvedora
