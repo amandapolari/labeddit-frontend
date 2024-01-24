@@ -5,7 +5,7 @@
 
 <!-- ![funcionamento-site-gif](./pokedex/src/assets/images/site.gif) -->
 
-Clique [**AQUI**]() para conferir o resultado final do site!
+Clique [**AQUI**](https://labeddit-frontend.onrender.com) para conferir o resultado final do site!
 
 </div>
 
@@ -101,11 +101,11 @@ O Design de app mobile first foi fornecido pela Labenu, se preferir acesso diret
 
 ![CommentsPage](./labeddit/src/assets/images/prot_commentpage.png)
 
-## Instalação
+## 5. Instalação
 
 [🔝](#índice)<br>
 
-### 5. Pré-requisitos:
+### Pré-requisitos:
 
 Ter instalado:
 
@@ -157,7 +157,7 @@ O frontend do projeto labeddit foi construído com:
 
 [🔝](#índice)<br>
 
-## Front-end
+### Front-end
 
 -   [✔️] Respeitar o layout do Figma
 -   [✔️] Uso do ReactJS
