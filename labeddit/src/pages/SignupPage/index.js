@@ -100,15 +100,9 @@ export const SignupPage = () => {
         setIsChecked(!isChecked);
         setMessageCheckbox('');
     };
-    const emailRegex = /^[^\s@]+@[^\s@]+\.(com)$/;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!emailRegex.test(form.email)) {
-            setErrorMessage('Por favor, adicione um e-mail válido');
-            return;
-        }
 
         if (!isChecked) {
             setMessageCheckbox('Você precisa aceitar os termos de uso!');
