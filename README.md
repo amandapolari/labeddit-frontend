@@ -40,6 +40,7 @@ O Labbedit é um projeto full-stack de conclusão de curso do bootcamp da Labenu
 ## 2. Definição de Produto
 
 [🔝](#índice)<br>
+
 O projeto Labeddit possui quatro páginas:
 
 ### Página de Login
@@ -81,6 +82,7 @@ O Labeddit oferece diversas funcionalidades aos usuários, inclusive um CRUD com
 ## 4. Protótipo
 
 [🔝](#índice)<br>
+
 O Design de app **mobile first** foi fornecido pela Labenu, se preferir acesso direto pelo Figma clique **[aqui](https://www.figma.com/file/Ks2VBBhW0tN4p9g2ZtZtXE/Projeto-Integrador-Labeddit?type=design&node-id=0%3A1&mode=design&t=2qjhW6dWtWzmEM15-1)**, ou então acompanhe as imagens abaixo:
 
 ### Login
@@ -111,7 +113,7 @@ Ter instalado:
 
 Caso não tenha instalado:
 
--   Faça o download do Node nesse [link](https://nodejs.org/en) da versão LTS, instale na sua máquina e verifique a instalação com o comando:
+-   Faça o download do Node nesse [link](https://nodejs.org/en) da versão **LTS**, instale na sua máquina e verifique a instalação com o comando:
 
     ```bash
     node -v
@@ -155,7 +157,7 @@ O frontend do projeto labeddit foi construído com:
 
 [🔝](#índice)<br>
 
-### Front-end
+### Front-end:
 
 -   [✔️] Respeitar o layout do Figma
 -   [✔️] Uso do ReactJS
