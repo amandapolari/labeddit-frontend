@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import GlobalContext from './GlobalContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const GlobalState = ({ children }) => {
     const [dataReceivedFromApi, setDataReceivedFromApi] = useState();
@@ -18,6 +18,27 @@ const GlobalState = ({ children }) => {
     const [editingContent, setEditingContent] = useState('');
     const [idPostMessageError, setIdPostMessageError] = useState('');
     const [isErrorPage, setIsErrorPage] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [timerStarted, setTimerStarted] = useState(false);
+
+    useEffect(() => {
+        if (setErrorMessage !== '') {
+            setShowAlert(false);
+        }
+    }, [showAlert]);
+
+    useEffect(() => {
+        if (timerStarted) {
+            setTimerStarted(false);
+            const timer = setTimeout(() => {
+                if (errorMessage === '' && !showAlert) {
+                    setShowAlert(true);
+                }
+            }, 2500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [timerStarted, showAlert, errorMessage]);
 
     const handleEdit = async (itemId, editFunction) => {
         try {
@@ -25,7 +46,7 @@ const GlobalState = ({ children }) => {
                 content: editingContent,
             };
             const response = await editFunction(body, itemId);
-            console.log(response);
+            // console.log(response);
             setIsEditing(false);
             setIdPostToEdit('');
             setIsUpdate(!isUpdate);
@@ -58,10 +79,9 @@ const GlobalState = ({ children }) => {
         try {
             const response = await deleteFunction(itemId);
             setIsUpdate(!isUpdate);
-            console.log(response);
+            // console.log(response);
         } catch (error) {
             console.log(error);
-            // talvez uma lógica pra mostrar o erro PARA usuário aqui!
         }
     };
 
@@ -117,6 +137,10 @@ const GlobalState = ({ children }) => {
         setIsCardMain,
         isErrorPage,
         setIsErrorPage,
+        showAlert,
+        setShowAlert,
+        timerStarted,
+        setTimerStarted,
     };
 
     return (

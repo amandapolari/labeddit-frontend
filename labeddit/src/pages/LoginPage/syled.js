@@ -45,7 +45,7 @@ export const SubtitleLogin = styled.h2`
     padding: 0;
     font-family: 'IBM Plex Sans';
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 1rem;
 
     color: ${theme.palette.black[1]};
     @media (min-width: 769px) {
@@ -87,6 +87,8 @@ export const ContainerForms = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    margin-top: 6vh;
+    /* margin-top: 8vh; */
 
     form {
         display: flex;
