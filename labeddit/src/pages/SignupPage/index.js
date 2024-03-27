@@ -6,7 +6,7 @@ import { goToFeedPage } from '../../routes/coordinator';
 import { Signup } from '../../services/api';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
-import { Header } from '../../components';
+import { Header, Notice } from '../../components';
 import {
     BtnCreateAccount,
     ContainerCheckbox,
@@ -33,7 +33,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { theme } from '../../styles';
 
 export const SignupPage = () => {
-    const context = useContext(GlobalContext);
+    const navigator = useNavigate();
     const {
         errorMessage,
         setErrorMessage,
@@ -45,8 +45,10 @@ export const SignupPage = () => {
         setIsSignupPage,
         isFeedOrCommentsPage,
         setIsFeedOrCommentsPage,
-    } = context;
-    const navigator = useNavigate();
+        showAlert,
+        setShowAlert,
+        setTimerStarted,
+    } = useContext(GlobalContext);
 
     const [form, setForm, onChange, resetForm] = useForm({
         nickname: '',
@@ -104,6 +106,10 @@ export const SignupPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // setShowAlert(true);
+
+        setTimerStarted(true);
+
         if (!isChecked) {
             setMessageCheckbox('Você precisa aceitar os termos de uso!');
             return;
@@ -135,8 +141,10 @@ export const SignupPage = () => {
             />
             <ContainerContentSignup>
                 <TextApresentation>
-                    Olá, boas vindas ao LabEddit ;)
+                    Olá, boas vindas ao LabEddit!
                 </TextApresentation>
+
+                {showAlert && <Notice />}
 
                 {errorMessage && (
                     <MessageAlertInputs>

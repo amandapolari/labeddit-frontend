@@ -29,14 +29,20 @@ import {
     ImageLogo,
     SubtitleLogin,
 } from './syled';
-
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Notice } from '../../components/Notice';
 
 export const LoginPage = () => {
     const navigator = useNavigate();
-    const context = useContext(GlobalContext);
-    const { errorMessage, setErrorMessage } = context;
+    const {
+        errorMessage,
+        setErrorMessage,
+        showAlert,
+        setShowAlert,
+        timerStarted,
+        setTimerStarted,
+    } = useContext(GlobalContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -56,6 +62,7 @@ export const LoginPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setTimerStarted(true);
 
         try {
             const body = {
@@ -65,7 +72,7 @@ export const LoginPage = () => {
 
             const response = await Login(body, setErrorMessage);
 
-            console.log('Resposta de sucesso:', response);
+            // console.log('Resposta de sucesso:', response);
             if (response.message && response.token) {
                 (() => {
                     localStorage.setItem('token', response.token);
@@ -83,6 +90,8 @@ export const LoginPage = () => {
                     O projeto de rede social da Labenu
                 </SubtitleLogin>
             </ContainerLogoAndTitle>
+
+            {showAlert && <Notice />}
 
             <ContainerForms>
                 <ContainerContentLogin>
