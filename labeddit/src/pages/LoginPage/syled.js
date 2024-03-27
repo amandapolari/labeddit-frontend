@@ -18,16 +18,23 @@ import { theme } from '../../styles/index';
     @media (min-width: 1200px) {
         
     }
+
+
+    Para telas maiores que 1200px
+    @media (min-width: 1200px) {
+
+    }
 */
 
 export const ContainerPageLogin = styled.div`
-    padding: 1.5rem;
+    padding: 1.3rem;
     background: ${theme.palette.white[1]};
-    height: 94.5vh;
+    /* height: 94.5vh; */
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    @media (min-width: 375px) {
+    /* @media (min-width: 375px) {
         height: 94.4vh;
     }
 
@@ -38,16 +45,20 @@ export const ContainerPageLogin = styled.div`
     @media (min-width: 1024px) {
         height: 92.6vh;
     }
+
+    @media (min-width: 1200px) {
+    } */
 `;
 
 export const SubtitleLogin = styled.h2`
     margin-top: 0;
+    margin-bottom: 10vh;
     padding: 0;
     font-family: 'IBM Plex Sans';
     font-weight: 400;
-    font-size: 1rem;
-
+    font-size: 0.8rem;
     color: ${theme.palette.black[1]};
+
     @media (min-width: 769px) {
         font-size: 1rem;
     }
@@ -58,12 +69,22 @@ export const SubtitleLogin = styled.h2`
 `;
 
 export const ContainerLogoAndTitle = styled.div`
-    padding: 4rem 4rem;
+    padding: 3rem 3rem 1rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+
+    @media (min-width: 769px) {
+        /* border: red solid 7px; */
+        /* font-size: 1rem; */
+        /* padding: 3rem 3rem 1rem 3rem; */
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 1.3rem;
+    }
 `;
 
 export const ImageLogo = styled.img`
@@ -72,11 +93,11 @@ export const ImageLogo = styled.img`
 `;
 
 export const ContainerContentLogin = styled.div`
-    @media (min-width: 769px) {
+    @media (min-width: 1200px) {
         form {
-            height: 92.6vh;
-            width: 50vw;
-            margin: 0 auto;
+            /* height: 92.6vh; */
+            width: 40vw;
+            /* margin: 0 auto; */
         }
     }
 `;
@@ -87,7 +108,8 @@ export const ContainerForms = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    margin-top: 6vh;
+    /* border: red solid 7px; */
+    /* margin-top: 10vh; */
     /* margin-top: 8vh; */
 
     form {
@@ -98,6 +120,8 @@ export const ContainerForms = styled.div`
     }
 
     @media (min-width: 375px) {
+        /* border: red solid 7px; */
+        /* margin-top: 3vh; */
     }
 
     @media (min-width: 769px) {
@@ -107,6 +131,17 @@ export const ContainerForms = styled.div`
     }
 
     @media (min-width: 1200px) {
+        /* border: blue solid 2px; */
+    }
+
+    /* === */
+    @media (min-width: 769px) {
+        margin-top: 2vh;
+    }
+
+    @media (min-width: 1200px) {
+        margin-top: 0;
+        padding: 1rem;
     }
 `;
 
@@ -121,6 +156,11 @@ export const ButtonLoginPage = styled.button`
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
+
+    @media (min-width: 1200px) {
+        width: 40vw;
+        /* border: solid red 1px; */
+    }
 `;
 
 export const ButtonCreateAccount = styled.button`
@@ -133,6 +173,11 @@ export const ButtonCreateAccount = styled.button`
     font-size: 0.9rem;
     font-family: 'Noto Sans';
     font-weight: 700;
+
+    @media (min-width: 1200px) {
+        width: 40vw;
+        /* border: solid red 1px; */
+    }
 `;
 
 export const DivisorLoginPage = styled.div`
@@ -151,20 +196,29 @@ export const ContainerButtonsLogin = styled.div`
     @media (min-width: 375px) {
     }
 
-    @media (min-width: 769px) {
+    /* @media (min-width: 769px) {
         button {
             width: 91vh;
         }
-    }
+    } */
 
     @media (min-width: 1024px) {
     }
 
     @media (min-width: 1200px) {
     }
+
+    @media (min-width: 1200px) {
+        width: 40vw;
+        /* border: solid red 1px; */
+    }
 `;
 
 export const ContainerAlertLogin = styled.div`
     width: 80vw;
     position: absolute;
+
+    @media (min-width: 1200px) {
+        width: 40%;
+    }
 `;

@@ -46,7 +46,7 @@ export const Header = ({
                 }}
                 isFeedOrCommentsPage={isFeedOrCommentsPage}
             >
-                Logout
+                Sair
             </ButtonLogout>
         </ContainerHeaderComponent>
     );

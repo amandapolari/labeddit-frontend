@@ -56,7 +56,7 @@ export const ContainerFormsSignup = styled.div`
         width: 100%;
         form {
             button {
-                width: 91vh;
+                /* width: 91vh; */
             }
         }
     }
